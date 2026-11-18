@@ -24,11 +24,24 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            background: #000 url('diseno.jpg') no-repeat center center / cover;
+            background: #000;
             position: relative;
         }
 
-        /* Overlay muy sutil para dejar ver el fondo */
+        /* VIDEO DE FONDO DIFUMINADO */
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            filter: blur(8px) brightness(0.75);
+            transform: scale(1.05);
+        }
+
+        /* Overlay muy sutil para oscurecer un poco el video y resaltar las letras */
         body::before {
             content: '';
             position: absolute;
@@ -96,16 +109,35 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
+        /* CHECK DE VERIFICACIÓN REAL ESTILO INSTAGRAM */
         .verified-badge {
-            color: #1d9bf0;
-            font-size: 17px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            color: #0095f6; /* Color azul oficial de Instagram */
+            flex-shrink: 0;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
         }
 
+        .verified-badge svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        /* ESTILO PARA LA BIO EN DOS LÍNEAS */
         .bio {
             color: rgba(255, 255, 255, 0.95);
             font-size: 13.5px;
             margin-bottom: 20px;
             text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            line-height: 1.4;
+        }
+
+        .bio span {
+            display: block;
         }
 
         /* ANIMACIÓN DE BRILLO TIPO OLA / COMPRA Y LATIDO */
@@ -138,11 +170,9 @@
             cursor: pointer;
             animation: pulseGlow 2.5s infinite ease-in-out;
             transition: transform 0.1s ease;
-            /* Efecto de brillo deslizante (onda de luz) */
             background-size: 200% 100%;
         }
 
-        /* Capa de brillo pasante */
         .btn-contacto::after {
             content: '';
             position: absolute;
@@ -193,7 +223,7 @@
             fill: currentColor;
         }
 
-        /* NOTIFICACIONES FLOTANTES TIPO IOS */
+        /* NOTIFICACIONES FLOTANTES TIPO IOS CON TRANSICIÓN DIFUMINADA */
         .ios-notification {
             position: absolute;
             top: 20px;
@@ -213,7 +243,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 10;
             opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
             pointer-events: none;
         }
 
@@ -276,7 +306,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
-        /* VENTANA DESLIZANTE LATERAL DE CATÁLOGO (Compacta) */
+        /* VENTANA DESLIZANTE DE CATÁLOGO */
         .catalog-drawer {
             position: fixed;
             top: 0;
@@ -335,7 +365,6 @@
             flex-grow: 1;
         }
 
-        /* Cuadrícula compacta de fotos */
         .catalog-item {
             aspect-ratio: 4/5;
             border-radius: 10px;
@@ -357,7 +386,7 @@
             transform: scale(1.05);
         }
 
-        /* MODAL DE FOTO CON ZOOM Y BOTÓN DE COMPRAR NEGRO CON BRILLO */
+        /* MODAL DE FOTO AMPLIADA */
         .photo-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -397,7 +426,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* NUEVO ESTILO: BOTÓN NEGRO CON EFECTO DE BRILLO Y PULSO */
         .btn-comprar {
             position: relative;
             overflow: hidden;
@@ -452,6 +480,12 @@
 </head>
 <body>
 
+    <!-- VIDEO DE FONDO EN BUCLE -->
+    <video autoplay muted loop playsinline class="background-video">
+        <source src="diseno.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+    </video>
+
     <!-- NOTIFICACIÓN FLOTANTE TIPO IOS -->
     <div id="iosNotif" class="ios-notification">
         <img id="notifImg" class="notif-avatar" src="cliente1.jpg" alt="Cliente">
@@ -467,30 +501,33 @@
 
     <div class="main-container">
         <div class="profile-card">
-            <!-- Foto de perfil central SIN MARCO -->
             <div class="avatar-container">
                 <img src="perfil.jpg" alt="Valeria Diaz">
             </div>
 
             <div class="name-container">
                 <h1>Valeria Diaz</h1>
-                <span class="verified-badge">✔</span>
+                <!-- CHECK DE VERIFICACIÓN ESTILO INSTAGRAM -->
+                <span class="verified-badge" title="Cuenta verificada">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-1.9 14.7L5.6 12.2l1.4-1.4 3.1 3.1 7-7 1.4 1.4-8.4 8.4Z"/></svg>
+                </span>
             </div>
-            <p class="bio">Contáctame aquí ✨</p>
+            
+            <p class="bio">
+                <span>Lima - Miraflores</span>
+                <span>Peruana - 21 años</span>
+            </p>
 
-            <!-- Botón WhatsApp -->
             <a href="https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20tu%20perfil%20y%20me%20gustaría%20más%20información." class="btn-contacto whatsapp" target="_blank">
                 <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2M12.04 3.65c2.24 0 4.35.87 5.93 2.45a8.38 8.38 0 0 1 2.46 5.93c0 4.63-3.78 8.41-8.41 8.41-1.51 0-2.98-.41-4.27-1.19l-.3-.18-3.15.83.84-3.07-.2-.32a8.34 8.34 0 0 1-1.28-4.43c0-4.63 3.78-8.41 8.41-8.41m4.74 10.16c-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.58.13-.17.26-.67.85-.82 1.03-.15.17-.31.2-.57.07-.26-.13-1.1-.4-2.1-1.3-.78-.69-1.31-1.54-1.46-1.8-.15-.26-.02-.4.11-.53.11-.11.26-.29.39-.44.13-.15.17-.26.26-.43.09-.17.04-.31-.02-.44-.06-.13-.58-1.4-.8-1.92-.22-.51-.44-.44-.6-.45h-.51c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.13.17 1.75 2.67 4.24 3.74.59.26 1.05.42 1.41.54.59.19 1.13.16 1.55.1.47-.07 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.07-.11-.24-.17-.5-.3Z"/></svg>
                 <span>Escríbeme al WhatsApp</span>
             </a>
 
-            <!-- Botón Telegram -->
             <a href="https://t.me/valerydia" class="btn-contacto telegram" target="_blank">
                 <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.85 1.18-5.23 3.48-.49.34-.94.51-1.34.5-.44-.01-1.28-.24-1.9-.44-.77-.24-1.37-.37-1.32-.78.03-.22.33-.44.94-.67 3.7-1.61 6.17-2.67 7.41-3.18 3.53-1.47 4.26-1.73 4.73-1.74.1 0 .33.02.48.15.12.1.15.23.17.33 0 .02.01.2-.02.43Z"/></svg>
                 <span>Escríbeme al Telegram</span>
             </a>
 
-            <!-- Botón Mis fotos -->
             <button class="btn-contacto btn-fotos" onclick="toggleCatalog()">
                 <span>Mis fotos 🔥</span>
             </button>
@@ -501,18 +538,16 @@
         </div>
     </div>
 
-    <!-- VENTANA DESLIZANTE DE CATÁLOGO (Servicios y contenido 🔥) -->
+    <!-- VENTANA DESLIZANTE DE CATÁLOGO -->
     <div id="catalogDrawer" class="catalog-drawer">
         <div class="catalog-header">
             <span class="catalog-title">Servicio y contenido 🔥</span>
             <button class="close-btn" onclick="toggleCatalog()">✕</button>
         </div>
-        <div class="catalog-body" id="catalogGrid">
-            <!-- Se cargan automáticamente las 4 fotos -->
-        </div>
+        <div class="catalog-body" id="catalogGrid"></div>
     </div>
 
-    <!-- MODAL DE FOTO AMPLIADA + ZOOM + BOTÓN "COMPRAR CONTENIDO" NEGRO CON BRILLO -->
+    <!-- MODAL DE FOTO AMPLIADA -->
     <div id="photoModal" class="photo-modal">
         <button class="modal-close" onclick="closePhotoModal()">✕</button>
         <div class="modal-content-wrapper">
@@ -524,7 +559,6 @@
     </div>
 
     <script>
-        // Reseñas flotantes con nombres masculinos
         const reseñasPool = [
             { name: "Carlos M.", text: "100% real y confiable, la atención es excelente 💯", foto: "cliente1.jpg" },
             { name: "Luis R.", text: "muy atenta y puntual, cumple con todo lo dicho ✨", foto: "cliente2.jpg" },
@@ -546,7 +580,6 @@
             { name: "Enrique P.", text: "todo conforme y muy seguro, sin duda volveré a escribirle 👑", foto: "cliente18.jpg" }
         ];
 
-        // Las 4 fotos de muestra del catálogo
         const catalogoMuestra = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
 
         const catalogGrid = document.getElementById('catalogGrid');
@@ -569,7 +602,7 @@
             const waBtn = document.getElementById('modalWhatsAppBtn');
             
             modalImg.src = imgSrc;
-            modalImg.style.transform = 'scale(1)'; // Reset zoom
+            modalImg.style.transform = 'scale(1)';
             waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20esta%20foto%20en%20tu%20catálogo%20y%20quiero%20comprar%20contenido%20🛒`;
             
             modal.classList.add('active');
@@ -580,7 +613,6 @@
             modal.classList.remove('active');
         }
 
-        // Zoom en la foto al tocarla
         function toggleZoom(img) {
             if (img.style.transform === 'scale(1.6)') {
                 img.style.transform = 'scale(1)';
@@ -591,25 +623,34 @@
             }
         }
 
-        // Sonido de campanita iOS sin latencia
-        function playNotificationSound() {
+        /* SONIDO DE ENVÍO DE MENSAJE DE WHATSAPP (iOS) */
+        function playWhatsAppSendSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
                 
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(1318.51, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
-                
-                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
-                
-                osc.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.08);
+                // Primer tono (bip agudo inicial)
+                const osc1 = audioCtx.createOscillator();
+                const gain1 = audioCtx.createGain();
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(1760, audioCtx.currentTime); // A6
+                gain1.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                osc1.connect(gain1);
+                gain1.connect(audioCtx.destination);
+                osc1.start();
+                osc1.stop(audioCtx.currentTime + 0.05);
+
+                // Segundo tono (bip de confirmación más alto)
+                const osc2 = audioCtx.createOscillator();
+                const gain2 = audioCtx.createGain();
+                osc2.type = 'sine';
+                osc2.frequency.setValueAtTime(2637.02, audioCtx.currentTime + 0.06); // E7
+                gain2.gain.setValueAtTime(0.15, audioCtx.currentTime + 0.06);
+                gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.14);
+                osc2.connect(gain2);
+                gain2.connect(audioCtx.destination);
+                osc2.start(audioCtx.currentTime + 0.06);
+                osc2.stop(audioCtx.currentTime + 0.14);
             } catch (e) {}
         }
 
@@ -620,25 +661,35 @@
         const notifText = document.getElementById('notifText');
 
         function mostrarSiguienteReseña() {
+            // Si ya está visible, hacemos un desvanecimiento rápido antes de cambiar el contenido
+            if (notifElement.classList.contains('show')) {
+                notifElement.classList.remove('show');
+                
+                // Esperamos un breve instante (200ms) para que se note la transición difuminada
+                setTimeout(() => {
+                    actualizarYMostrarNotif();
+                }, 200);
+            } else {
+                actualizarYMostrarNotif();
+            }
+        }
+
+        function actualizarYMostrarNotif() {
             const item = reseñasPool[currentIndex];
             
             notifImg.src = item.foto;
             notifName.textContent = item.name + " (Recomendación)";
             notifText.textContent = item.text;
 
-            // SONIDO Y ANIMACIÓN EXACTAMENTE AL MISMO INSTANTE
-            playNotificationSound();
+            playWhatsAppSendSound();
             notifElement.classList.add('show');
-
-            setTimeout(() => {
-                notifElement.classList.remove('show');
-            }, 4000);
 
             currentIndex = (currentIndex + 1) % reseñasPool.length;
             
             const tiemposEspera = [4000, 6000, 8000, 5000, 7000];
             const tiempoAleatorio = tiemposEspera[Math.floor(Math.random() * tiemposEspera.length)];
             
+            // Programamos el siguiente cambio de reseña
             setTimeout(mostrarSiguienteReseña, tiempoAleatorio + 4000);
         }
 
