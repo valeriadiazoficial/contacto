@@ -2,76 +2,82 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valeria Diaz | Contacto Directo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Valeria Diaz | Contacto</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Elimina el cuadro gris/transparente al tocar en celulares */
+        }
+
+        html, body {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
             background-color: #000;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden; /* Evita que la página se deslice */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
         }
+
         .page-container {
             position: relative;
             width: 100%;
-            max-width: 420px;
-            aspect-ratio: 9/16;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            height: 100%;
+            max-width: 480px; /* Se adapta perfecto al ancho del celular en pantalla completa */
         }
+
         .page-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* La foto llena toda la pantalla sin deformarse */
             display: block;
         }
+
+        /* Zonas táctiles invisibles para los botones */
         .interactive-link {
             position: absolute;
-            left: 10%;
-            width: 80%;
-            height: 9%;
-            border-radius: 50px;
+            left: 15%;
+            width: 70%;
+            height: 8.5%;
             cursor: pointer;
             background: transparent;
+            border: none;
+            outline: none;
         }
-        .btn-wa { top: 57.5%; }
-        .btn-tg { top: 68.5%; }
+
+        /* Posición exacta sobre el botón verde de WhatsApp */
+        .btn-wa {
+            top: 59.5%;
+        }
+
+        /* Posición exacta sobre el botón azul de Telegram */
+        .btn-tg {
+            top: 69.5%;
+        }
     </style>
 </head>
 <body>
+
     <div class="page-container">
-        <!-- Asegúrate de que tu imagen se llame exactamente 'diseno.jpg' -->
+        <!-- Tu imagen de diseño en pantalla completa -->
         <img src="diseno.jpg" alt="Valeria Diaz - Contacto">
 
-        <!-- Enlace WhatsApp con mensaje automático -->
+        <!-- Enlace a WhatsApp con mensaje automático -->
         <a href="https://wa.me/51999894839?text=Hola%20informacion%20%3F%20%F0%9F%99%88" 
            class="interactive-link btn-wa" 
-           target="_blank"></a>
+           target="_blank" 
+           rel="noopener noreferrer"></a>
 
-        <!-- Enlace Telegram -->
+        <!-- Enlace a Telegram corregido -->
         <a href="https://t.me/valery_dia" 
            class="interactive-link btn-tg" 
-           target="_blank"></a>
+           target="_blank" 
+           rel="noopener noreferrer"></a>
     </div>
+
 </body>
-</html>
-<html>
-
-</html><html>
-
-</html><html>
-
-</html><html>
-
-</html><html>
-
-</html><html>
-
-</html><html>
-
-</html><html>
-
 </html>
