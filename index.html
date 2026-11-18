@@ -415,7 +415,7 @@
             transition: transform 0.3s ease;
         }
 
-        /* ESTILO BOTÓN COMPRAR Y SEPARAR CITA (NEGRO CON BRILLO Y PULSO) */
+        /* ESTILO BOTÓN COMPRAR Y SEPARAR CITA */
         .btn-comprar {
             position: relative;
             overflow: hidden;
@@ -470,6 +470,11 @@
 </head>
 <body>
 
+    <!-- ELEMENTO DE AUDIO PARA LA MÚSICA DE FONDO (Sube tu archivo como 'musica-fondo.mp3') -->
+    <audio id="backgroundAudio" loop preload="auto">
+        <source src="musica-fondo.mp3" type="audio/mp3">
+    </audio>
+
     <!-- NOTIFICACIÓN FLOTANTE TIPO IOS -->
     <div id="iosNotif" class="ios-notification">
         <img id="notifImg" class="notif-avatar" src="cliente1.jpg" alt="Cliente">
@@ -511,7 +516,8 @@
                 <span>Escríbeme al Telegram</span>
             </a>
 
-            <button class="btn-contacto btn-fotos" onclick="toggleCatalog()">
+            <!-- BOTÓN MIS FOTOS: AQUÍ SE ACTIVA LA MÚSICA -->
+            <button class="btn-contacto btn-fotos" onclick="toggleCatalog(); playBackgroundMusic();">
                 <span>Mis fotos 🔥</span>
             </button>
 
@@ -530,18 +536,16 @@
         <div class="catalog-body" id="catalogGrid"></div>
     </div>
 
-    <!-- MODAL DE FOTO AMPLIADA CON LOS DOS BOTONES -->
+    <!-- MODAL DE FOTO AMPLIADA -->
     <div id="photoModal" class="photo-modal">
         <button class="modal-close" onclick="closePhotoModal()">✕</button>
         <div class="modal-content-wrapper">
             <img id="modalImage" class="modal-img" src="" alt="Foto de muestra" onclick="toggleZoom(this)">
             
-            <!-- Botón 1: Comprar Contenido -->
             <a id="modalWhatsAppBtn" class="btn-comprar" href="#" target="_blank">
                 <span>Comprar contenido 🛒🔥</span>
             </a>
 
-            <!-- Botón 2: Separar Cita -->
             <a id="modalCitaBtn" class="btn-comprar" href="#" target="_blank" style="animation-delay: 0.5s;">
                 <span>Separar cita 🔥</span>
             </a>
@@ -613,6 +617,23 @@
             } else {
                 img.style.transform = 'scale(1.6)';
                 img.style.cursor = 'zoom-out';
+            }
+        }
+
+        /* CONTROL DE MÚSICA DE FONDO MUY MANIPULABLE */
+        let musicStarted = false;
+        function playBackgroundMusic() {
+            const bgAudio = document.getElementById('backgroundAudio');
+            if (bgAudio && !musicStarted) {
+                // 🎛️ AQUÍ PUEDES MANIPULAR EL VOLUMEN (De 0.0 hasta 1.0)
+                // Por ejemplo: 0.15 es muy sutil, 0.3 es medio, 0.5 es más fuerte.
+                bgAudio.volume = 0.25; 
+
+                bgAudio.play().then(() => {
+                    musicStarted = true;
+                }).catch(e => {
+                    // Manejo de seguridad del navegador
+                });
             }
         }
 
