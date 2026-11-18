@@ -212,12 +212,12 @@
             fill: currentColor;
         }
 
-        /* NOTIFICACIONES FLOTANTES TIPO IOS SIN LATENCIA (APARICIÓN INSTANTÁNEA) */
+        /* NOTIFICACIONES FLOTANTES TIPO IOS CON TRANSICIÓN DIFUMINADA */
         .ios-notification {
             position: absolute;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%) translateY(-120px);
+            transform: translateX(-50%) translateY(-100px);
             width: 90%;
             max-width: 350px;
             background: rgba(20, 20, 20, 0.85);
@@ -232,9 +232,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 10;
             opacity: 0;
-            transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
             pointer-events: none;
-            will-change: transform, opacity;
         }
 
         .ios-notification.show {
@@ -610,4 +609,275 @@
             </p>
 
             <a href="https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20tu%20perfil%20y%20me%20gustaría%20más%20información." class="btn-contacto whatsapp" target="_blank">
-                <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l
+                <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2M12.04 3.65c2.24 0 4.35.87 5.93 2.45a8.38 8.38 0 0 1 2.46 5.93c0 4.63-3.78 8.41-8.41 8.41-1.51 0-2.98-.41-4.27-1.19l-.3-.18-3.15.83.84-3.07-.2-.32a8.34 8.34 0 0 1-1.28-4.43c0-4.63 3.78-8.41 8.41-8.41m4.74 10.16c-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.58.13-.17.26-.67.85-.82 1.03-.15.17-.31.2-.57.07-.26-.13-1.1-.4-2.1-1.3-.78-.69-1.31-1.54-1.46-1.8-.15-.26-.02-.4.11-.53.11-.11.26-.29.39-.44.13-.15.17-.26.26-.43.09-.17.04-.31-.02-.44-.06-.13-.58-1.4-.8-1.92-.22-.51-.44-.44-.6-.45h-.51c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.13.17 1.75 2.67 4.24 3.74.59.26 1.05.42 1.41.54.59.19 1.13.16 1.55.1.47-.07 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.07-.11-.24-.17-.5-.3Z"/></svg>
+                <span>Escríbeme al WhatsApp</span>
+            </a>
+
+            <a href="https://t.me/valerydia" class="btn-contacto telegram" target="_blank">
+                <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.85 1.18-5.23 3.48-.49.34-.94.51-1.34.5-.44-.01-1.28-.24-1.9-.44-.77-.24-1.37-.37-1.32-.78.03-.22.33-.44.94-.67 3.7-1.61 6.17-2.67 7.41-3.18 3.53-1.47 4.26-1.73 4.73-1.74.1 0 .33.02.48.15.12.1.15.23.17.33 0 .02.01.2-.02.43Z"/></svg>
+                <span>Escríbeme al Telegram</span>
+            </a>
+
+            <!-- BOTÓN MIS FOTOS -->
+            <button class="btn-contacto btn-fotos" onclick="toggleCatalog(); playBackgroundMusic();">
+                <span>MIS FOTOS 📸</span>
+            </button>
+
+            <!-- BOTÓN SEPARAR CITA -->
+            <button class="btn-contacto btn-fotos" onclick="openCitaModal(); playBackgroundMusic();" style="background: rgba(180, 20, 60, 0.85); border: 1px solid rgba(255,255,255,0.4);">
+                <span>SEPARAR MI CITA 🍑</span>
+            </button>
+
+            <div class="location-footer">
+                📍 Frente al Parque Kennedy
+            </div>
+        </div>
+    </div>
+
+    <!-- VENTANA DESLIZANTE DE CATÁLOGO -->
+    <div id="catalogDrawer" class="catalog-drawer">
+        <div class="catalog-header">
+            <span class="catalog-title">Servicio y contenido 🔥</span>
+            <button class="close-btn" onclick="toggleCatalog()">✕</button>
+        </div>
+        <div class="catalog-body" id="catalogGrid"></div>
+    </div>
+
+    <!-- MODAL DE CHECKOUT: COMPRAR CONTENIDO (YAPE / PLIN) -->
+    <div id="photoModal" class="photo-modal">
+        <button class="modal-close" onclick="closePhotoModal()">✕</button>
+        <div class="modal-content-wrapper">
+            <img id="modalImage" class="modal-img" src="" alt="Foto de muestra" onclick="toggleZoom(this)">
+            
+            <div class="checkout-box">
+                <h3>⭐ Contenido personalizado ⭐</h3>
+                <ul>
+                    <li>- VIDEOS PRIVADOS 🔞</li>
+                    <li>- FOTOS ERÓTICAS 🔞</li>
+                    <li>- AUDIOS HOT 🔞</li>
+                    <li>- CHAT HOT 🔞</li>
+                    <li>- VIDEOLLAMADA HOT 🔞</li>
+                    <li>- SALUDOS PERSONALIZADOS 🔞</li>
+                </ul>
+                <div class="price-tag">PRECIO : 35 SOLES 🙈🔥</div>
+            </div>
+
+            <button class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
+                <span>Pagar con Yape (35 Soles) 💜</span>
+            </button>
+
+            <button class="btn-comprar btn-plin" onclick="copiarNumeroYPlin('918168248', 'Plin', 'Yazmin')">
+                <span>Pagar con Plin (35 Soles) 💙</span>
+            </button>
+
+            <a id="modalWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
+                <span>Enviar comprobante para atención 📲</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MODAL DE CHECKOUT: SEPARAR CITA (YAPE / PLIN ADELANTO 50%) -->
+    <div id="citaModal" class="photo-modal">
+        <button class="modal-close" onclick="closeCitaModal()">✕</button>
+        <div class="modal-content-wrapper">
+            <div class="checkout-box">
+                <h3>✨ ATENCION PRIVADA A1✨</h3>
+                <div class="cita-text">Holii guapo, aqui te brindo la informacion👅
+Vajin4l - Or4l - An4l 
+1 hora = 100 soles
+Soy una chica privada A1, solo atiendo por citas
+estoy por Miraflores o voy a domicilio 💋</div>
+                <div class="price-tag"> SEPARAR MI CITA CON 50 SOLES 🙈</div>
+            </div>
+
+            <button class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
+                <span>Pagar con Yape (50 Soles) 💜</span>
+            </button>
+
+            <button class="btn-comprar btn-plin" onclick="copiarNumeroYPlin('918168248', 'Plin', 'Yazmin')">
+                <span>Pagar con Plin (50 Soles) 💙</span>
+            </button>
+
+            <a id="citaWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
+                <span>Enviar comprobante y separar cita 📲</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const reseñasPool = [
+            { name: "Carlos M.", text: "Deja bien esta lokita, excelente 💯", foto: "cliente1.jpg" },
+            { name: "Luis R.", text: "la firme si es la misma que sale en la foto p", foto: "cliente2.jpg" },
+            { name: "Diego P.", text: "me enamore de ella csmr🔥", foto: "cliente3.jpg" },
+            { name: "Jorge G.", text: "Toda una chica topp y un trato muy agradable, de confianza", foto: "cliente4.jpg" },
+            { name: "Miguel S.", text: "Es muy limpia y huele rico 😋, super recomendada ", foto: "cliente5.jpg" },
+            { name: "Alejandro T.", text: "sin rodeos ni engaños, es la misma de las fotos me deja bien 10/10", foto: "cliente6.jpg" },
+            { name: "Fernando L.", text: "excelente servicio y una atención de primera ✨", foto: "cliente7.jpg" },
+            { name: "Gabriel B.", text: "la recomiendo a ojos cerrados, total discreción", foto: "cliente8.jpg" },
+            { name: "Ricardo C.", text: "muy pulida y atenta a cada detalle, un 10/10 💎", foto: "cliente9.jpg" },
+            { name: "Mateo V.", text: "superó mis expectativas, muy buena onda", foto: "cliente10.jpg" },
+            { name: "Daniel Z.", text: "agradable y respetuosa, te hace sentir cómodo de inmediato", foto: "cliente11.jpg" },
+            { name: "Andrés M.", text: "atención rápida y muy segura, totalmente de confianza 🤍", foto: "cliente12.jpg" },
+            { name: "Rodrigo N.", text: "cero problemas gracias pense era estafa jeje", foto: "cliente13.jpg" },
+            { name: "Sebastián R.", text: "te da una seguridad increíble, cumple con todo", foto: "cliente14.jpg" },
+            { name: "Raúl D.", text: "muy buen trato y excelente ubicación", foto: "cliente15.jpg" },
+            { name: "Bruno S.", text: "super recomendada, te da esa confianza al toque 💯", foto: "cliente16.jpg" },
+            { name: "Manuel F.", text: "atención limpia, educada y muy amable, excelente", foto: "cliente17.jpg" },
+            { name: "Enrique P.", text: "todo conforme , deja bien esta lokita, sin duda volveré a escribirle 👑", foto: "cliente18.jpg" }
+        ];
+
+        const catalogoMuestra = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
+
+        const catalogGrid = document.getElementById('catalogGrid');
+        catalogoMuestra.forEach((fotoSrc, index) => {
+            const div = document.createElement('div');
+            div.className = 'catalog-item';
+            div.innerHTML = `<img src="${fotoSrc}" alt="Muestra ${index + 1}" loading="lazy">`;
+            div.onclick = () => openPhotoModal(fotoSrc);
+            catalogGrid.appendChild(div);
+        });
+
+        function toggleCatalog() {
+            const drawer = document.getElementById('catalogDrawer');
+            drawer.classList.toggle('open');
+        }
+
+        function openPhotoModal(imgSrc) {
+            const modal = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalImage');
+            const waBtn = document.getElementById('modalWhatsAppBtn');
+            
+            modalImg.src = imgSrc;
+            modalImg.style.transform = 'scale(1)';
+            
+            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20ya%20realicé%20el%20pago%20de%2035%20soles%20por%20Yape/Plin%20para%20comprar%20contenido.%20Aquí%20está%20mi%20comprobante%20🛒🔥`;
+            
+            modal.classList.add('active');
+        }
+
+        function closePhotoModal() {
+            const modal = document.getElementById('photoModal');
+            modal.classList.remove('active');
+        }
+
+        function openCitaModal() {
+            const modal = document.getElementById('citaModal');
+            const waBtn = document.getElementById('citaWhatsAppBtn');
+            
+            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20ya%20realicé%20el%20pago%20del%20adelanto%20de%2050%20soles%20por%20la%20cita.%20Aquí%20está%20mi%20comprobante%20🔥`;
+            
+            modal.classList.add('active');
+        }
+
+        function closeCitaModal() {
+            const modal = document.getElementById('citaModal');
+            modal.classList.remove('active');
+        }
+
+        function toggleZoom(img) {
+            if (img.style.transform === 'scale(1.6)') {
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'zoom-in';
+            } else {
+                img.style.transform = 'scale(1.6)';
+                img.style.cursor = 'zoom-out';
+            }
+        }
+
+        /* FUNCIÓN PARA COPIAR NÚMERO Y MOSTRAR TOAST MINIFATURA SUPERIOR */
+        function copiarNumeroYPlin(numero, metodo, titular) {
+            navigator.clipboard.writeText(numero).then(() => {
+                mostrarToast(`📋 ¡${metodo} copiado! (${numero} - ${titular})`);
+            }).catch(err => {
+                prompt(`Copia el número de ${metodo}:`, numero);
+            });
+        }
+
+        let toastTimeout;
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById('copyToast');
+            toast.textContent = mensaje;
+            toast.classList.add('show');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        /* CONTROL DE MÚSICA DE FONDO */
+        let musicStarted = false;
+        function playBackgroundMusic() {
+            const bgAudio = document.getElementById('backgroundAudio');
+            if (bgAudio && !musicStarted) {
+                bgAudio.volume = 0.25; 
+                bgAudio.play().then(() => {
+                    musicStarted = true;
+                }).catch(e => {});
+            }
+        }
+
+        /* REPRODUCIR SONIDO DE NOTIFICACIÓN PERSONALIZADO */
+        function playCustomNotificationSound() {
+            const customSound = document.getElementById('notifSound');
+            if (customSound) {
+                customSound.currentTime = 0;
+                customSound.volume = 1.0;
+                customSound.play().catch(e => {
+                    // Respaldo por si el navegador bloquea la reproducción automática
+                    try {
+                        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        const osc1 = audioCtx.createOscillator();
+                        const gain1 = audioCtx.createGain();
+                        osc1.type = 'sine';
+                        osc1.frequency.setValueAtTime(1760, audioCtx.currentTime);
+                        gain1.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                        gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                        osc1.connect(gain1);
+                        gain1.connect(audioCtx.destination);
+                        osc1.start();
+                        osc1.stop(audioCtx.currentTime + 0.05);
+                    } catch (err) {}
+                });
+            }
+        }
+
+        let currentIndex = 0;
+        const notifElement = document.getElementById('iosNotif');
+        const notifImg = document.getElementById('notifImg');
+        const notifName = document.getElementById('notifName');
+        const notifText = document.getElementById('notifText');
+
+        function mostrarSiguienteReseña() {
+            if (notifElement.classList.contains('show')) {
+                notifElement.classList.remove('show');
+                setTimeout(() => {
+                    actualizarYMostrarNotif();
+                }, 200);
+            } else {
+                actualizarYMostrarNotif();
+            }
+        }
+
+        function actualizarYMostrarNotif() {
+            const item = reseñasPool[currentIndex];
+            
+            notifImg.src = item.foto;
+            notifName.textContent = item.name + " (Recomendación)";
+            notifText.textContent = item.text;
+
+            playCustomNotificationSound(); // Reproduce tu archivo notificacion.mp3
+            notifElement.classList.add('show');
+
+            currentIndex = (currentIndex + 1) % reseñasPool.length;
+            
+            const tiemposEspera = [4000, 6000, 8000, 5000, 7000];
+            const tiempoAleatorio = tiemposEspera[Math.floor(Math.random() * tiemposEspera.length)];
+            
+            setTimeout(mostrarSiguienteReseña, tiempoAleatorio + 4000);
+        }
+
+        setTimeout(mostrarSiguienteReseña, 2000);
+    </script>
+</body>
+</html>
