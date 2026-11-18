@@ -28,12 +28,12 @@
             position: relative;
         }
 
-        /* Overlay muy suave para dejar ver el fondo */
+        /* Overlay muy sutil para dejar ver el fondo */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.25);
             z-index: 1;
         }
 
@@ -50,12 +50,12 @@
             padding: 20px;
         }
 
-        /* Tarjeta de perfil central: MUY transparente y poco difuminada */
+        /* Tarjeta central: transparencia alta y difuminado muy bajo */
         .profile-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 24px;
             padding: 25px 20px;
             width: 100%;
@@ -64,14 +64,15 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
+        /* Foto de perfil SIN MARCO BLANCO */
         .avatar-container {
             width: 85px;
             height: 85px;
             margin: 0 auto 12px auto;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            border: none;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
         }
 
         .avatar-container img {
@@ -92,7 +93,7 @@
             color: #fff;
             font-size: 21px;
             font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
         .verified-badge {
@@ -101,30 +102,27 @@
         }
 
         .bio {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             font-size: 13.5px;
             margin-bottom: 20px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
         }
 
-        /* Animación de latido/palpitar para los botones (Juego mental de atracción) */
+        /* ANIMACIÓN DE BRILLO TIPO OLA / COMPRA Y LATIDO */
+        @keyframes shineWave {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
         @keyframes pulseGlow {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            }
-            50% {
-                transform: scale(1.03);
-                box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
 
-        /* Botones de contacto y catálogo con animación interactiva */
         .btn-contacto {
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -140,6 +138,30 @@
             cursor: pointer;
             animation: pulseGlow 2.5s infinite ease-in-out;
             transition: transform 0.1s ease;
+            /* Efecto de brillo deslizante (onda de luz) */
+            background-size: 200% 100%;
+        }
+
+        /* Capa de brillo pasante */
+        .btn-contacto::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 150%; height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.35),
+                transparent
+            );
+            transform: skewX(-20deg);
+            animation: shineSweep 3s infinite linear;
+        }
+
+        @keyframes shineSweep {
+            0% { left: -150%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
         }
 
         .btn-contacto:active {
@@ -180,8 +202,8 @@
             width: 90%;
             max-width: 350px;
             background: rgba(20, 20, 20, 0.85);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 12px 16px;
@@ -191,7 +213,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 10;
             opacity: 0;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
             pointer-events: none;
         }
 
@@ -245,7 +267,7 @@
 
         .location-footer {
             margin-top: 10px;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 13px;
             display: flex;
             align-items: center;
@@ -254,7 +276,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
-        /* VENTANA DESLIZANTE LATERAL DE CATÁLOGO */
+        /* VENTANA DESLIZANTE LATERAL DE CATÁLOGO (4 fotos) */
         .catalog-drawer {
             position: fixed;
             top: 0;
@@ -263,8 +285,8 @@
             max-width: 400px;
             height: 100%;
             background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 100;
             box-shadow: -10px 0 30px rgba(0,0,0,0.8);
             transition: right 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
@@ -330,11 +352,11 @@
             transition: transform 0.3s ease;
         }
 
-        /* MODAL DE FOTO ESTABILIZADA CON BOTÓN DE CITA */
+        /* MODAL DE FOTO CON ZOOM Y BOTÓN DE COMPRAR */
         .photo-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.92);
             z-index: 200;
             display: flex;
             flex-direction: column;
@@ -362,13 +384,17 @@
 
         .modal-img {
             width: 100%;
-            max-height: 60vh;
+            max-height: 55vh;
             object-fit: contain;
             border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.2);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
         }
 
-        .btn-cita {
+        .btn-comprar {
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -385,6 +411,22 @@
             border: none;
             cursor: pointer;
             animation: pulseGlow 2s infinite ease-in-out;
+            background-size: 200% 100%;
+        }
+
+        .btn-comprar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 150%; height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transform: skewX(-20deg);
+            animation: shineSweep 2.5s infinite linear;
         }
 
         .modal-close {
@@ -419,7 +461,7 @@
 
     <div class="main-container">
         <div class="profile-card">
-            <!-- Foto de perfil central -->
+            <!-- Foto de perfil central SIN MARCO -->
             <div class="avatar-container">
                 <img src="perfil.jpg" alt="Valeria Diaz">
             </div>
@@ -430,19 +472,19 @@
             </div>
             <p class="bio">Contáctame aquí ✨</p>
 
-            <!-- Botón WhatsApp con latido e icono -->
+            <!-- Botón WhatsApp -->
             <a href="https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20tu%20perfil%20y%20me%20gustaría%20más%20información." class="btn-contacto whatsapp" target="_blank">
                 <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2M12.04 3.65c2.24 0 4.35.87 5.93 2.45a8.38 8.38 0 0 1 2.46 5.93c0 4.63-3.78 8.41-8.41 8.41-1.51 0-2.98-.41-4.27-1.19l-.3-.18-3.15.83.84-3.07-.2-.32a8.34 8.34 0 0 1-1.28-4.43c0-4.63 3.78-8.41 8.41-8.41m4.74 10.16c-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.58.13-.17.26-.67.85-.82 1.03-.15.17-.31.2-.57.07-.26-.13-1.1-.4-2.1-1.3-.78-.69-1.31-1.54-1.46-1.8-.15-.26-.02-.4.11-.53.11-.11.26-.29.39-.44.13-.15.17-.26.26-.43.09-.17.04-.31-.02-.44-.06-.13-.58-1.4-.8-1.92-.22-.51-.44-.44-.6-.45h-.51c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.13.17 1.75 2.67 4.24 3.74.59.26 1.05.42 1.41.54.59.19 1.13.16 1.55.1.47-.07 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.07-.11-.24-.17-.5-.3Z"/></svg>
                 <span>Escríbeme al WhatsApp</span>
             </a>
 
-            <!-- Botón Telegram con latido e icono -->
+            <!-- Botón Telegram -->
             <a href="https://t.me/valerydia" class="btn-contacto telegram" target="_blank">
                 <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.85 1.18-5.23 3.48-.49.34-.94.51-1.34.5-.44-.01-1.28-.24-1.9-.44-.77-.24-1.37-.37-1.32-.78.03-.22.33-.44.94-.67 3.7-1.61 6.17-2.67 7.41-3.18 3.53-1.47 4.26-1.73 4.73-1.74.1 0 .33.02.48.15.12.1.15.23.17.33 0 .02.01.2-.02.43Z"/></svg>
                 <span>Escríbeme al Telegram</span>
             </a>
 
-            <!-- Botón Mis fotos con latido -->
+            <!-- Botón Mis fotos -->
             <button class="btn-contacto btn-fotos" onclick="toggleCatalog()">
                 <span>Mis fotos 🔥</span>
             </button>
@@ -453,29 +495,30 @@
         </div>
     </div>
 
-    <!-- VENTANA DESLIZANTE LATERAL DE CATÁLOGO (18 FOTOS) -->
+    <!-- VENTANA DESLIZANTE DE CATÁLOGO (4 fotos: foto1.jpg a foto4.jpg) -->
     <div id="catalogDrawer" class="catalog-drawer">
         <div class="catalog-header">
-            <span class="catalog-title">Galería & Reseñas 📸</span>
+            <span class="catalog-title">Catálogo de Muestra 📸</span>
             <button class="close-btn" onclick="toggleCatalog()">✕</button>
         </div>
         <div class="catalog-body" id="catalogGrid">
-            <!-- Las 18 fotos -->
+            <!-- Se cargan automáticamente las 4 fotos -->
         </div>
     </div>
 
-    <!-- MODAL DE FOTO ESTABILIZADA CON BOTÓN DE CITA -->
+    <!-- MODAL DE FOTO AMPLIADA + ZOOM + BOTÓN "COMPRAR CONTENIDO" -->
     <div id="photoModal" class="photo-modal">
         <button class="modal-close" onclick="closePhotoModal()">✕</button>
         <div class="modal-content-wrapper">
-            <img id="modalImage" class="modal-img" src="" alt="Foto ampliada">
-            <a id="modalWhatsAppBtn" class="btn-cita" href="#" target="_blank">
-                <span>Quiero separar una cita contigo 💋</span>
+            <img id="modalImage" class="modal-img" src="" alt="Foto de muestra" onclick="toggleZoom(this)">
+            <a id="modalWhatsAppBtn" class="btn-comprar" href="#" target="_blank">
+                <span>Comprar contenido 🛒🔥</span>
             </a>
         </div>
     </div>
 
     <script>
+        // Reseñas flotantes con nombres masculinos
         const reseñasPool = [
             { name: "Carlos M.", text: "100% real y confiable, la atención es excelente 💯", foto: "cliente1.jpg" },
             { name: "Luis R.", text: "muy atenta y puntual, cumple con todo lo dicho ✨", foto: "cliente2.jpg" },
@@ -497,12 +540,15 @@
             { name: "Enrique P.", text: "todo conforme y muy seguro, sin duda volveré a escribirle 👑", foto: "cliente18.jpg" }
         ];
 
+        // Las 4 fotos de muestra del catálogo
+        const catalogoMuestra = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
+
         const catalogGrid = document.getElementById('catalogGrid');
-        reseñasPool.forEach((item, index) => {
+        catalogoMuestra.forEach((fotoSrc, index) => {
             const div = document.createElement('div');
             div.className = 'catalog-item';
-            div.innerHTML = `<img src="${item.foto}" alt="Foto ${index + 1}" loading="lazy">`;
-            div.onclick = () => openPhotoModal(item.foto);
+            div.innerHTML = `<img src="${fotoSrc}" alt="Muestra ${index + 1}" loading="lazy">`;
+            div.onclick = () => openPhotoModal(fotoSrc);
             catalogGrid.appendChild(div);
         });
 
@@ -517,7 +563,8 @@
             const waBtn = document.getElementById('modalWhatsAppBtn');
             
             modalImg.src = imgSrc;
-            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20esta%20foto%20en%20tu%20catálogo%20y%20quiero%20separar%20una%20cita%20contigo%20💋`;
+            modalImg.style.transform = 'scale(1)'; // Reset zoom
+            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20esta%20foto%20en%20tu%20catálogo%20y%20quiero%20comprar%20contenido%20🛒`;
             
             modal.classList.add('active');
         }
@@ -527,6 +574,18 @@
             modal.classList.remove('active');
         }
 
+        // Zoom en la foto al tocarla
+        function toggleZoom(img) {
+            if (img.style.transform === 'scale(1.6)') {
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'zoom-in';
+            } else {
+                img.style.transform = 'scale(1.6)';
+                img.style.cursor = 'zoom-out';
+            }
+        }
+
+        // Sonido de campanita iOS sin latencia
         function playNotificationSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -534,10 +593,10 @@
                 const gainNode = audioCtx.createGain();
                 
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.08);
+                osc.frequency.setValueAtTime(1318.51, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
                 
-                gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
                 
                 osc.connect(gainNode);
@@ -561,8 +620,9 @@
             notifName.textContent = item.name + " (Recomendación)";
             notifText.textContent = item.text;
 
-            notifElement.classList.add('show');
+            // SONIDO Y ANIMACIÓN EXACTAMENTE AL MISMO INSTANTE
             playNotificationSound();
+            notifElement.classList.add('show');
 
             setTimeout(() => {
                 notifElement.classList.remove('show');
@@ -570,7 +630,7 @@
 
             currentIndex = (currentIndex + 1) % reseñasPool.length;
             
-            const tiemposEspera = [3000, 5000, 7000, 4000, 6000, 8000];
+            const tiemposEspera = [4000, 6000, 8000, 5000, 7000];
             const tiempoAleatorio = tiemposEspera[Math.floor(Math.random() * tiemposEspera.length)];
             
             setTimeout(mostrarSiguienteReseña, tiempoAleatorio + 4000);
