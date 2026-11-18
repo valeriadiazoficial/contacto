@@ -28,12 +28,12 @@
             position: relative;
         }
 
-        /* Overlay oscuro para resaltar el contenido */
+        /* Overlay muy suave para dejar ver el fondo */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
 
@@ -50,18 +50,18 @@
             padding: 20px;
         }
 
-        /* Tarjeta de perfil central tipo cristal */
+        /* Tarjeta de perfil central: MUY transparente y poco difuminada */
         .profile-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 24px;
             padding: 25px 20px;
             width: 100%;
             max-width: 360px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
         .avatar-container {
@@ -70,7 +70,7 @@
             margin: 0 auto 12px auto;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.8);
+            border: 3px solid rgba(255, 255, 255, 0.9);
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
 
@@ -92,6 +92,7 @@
             color: #fff;
             font-size: 21px;
             font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .verified-badge {
@@ -100,52 +101,77 @@
         }
 
         .bio {
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 13.5px;
             margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* Botones de contacto y catálogo */
+        /* Animación de latido/palpitar para los botones (Juego mental de atracción) */
+        @keyframes pulseGlow {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            }
+        }
+
+        /* Botones de contacto y catálogo con animación interactiva */
         .btn-contacto {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
             padding: 13px;
             border-radius: 14px;
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
-            margin-bottom: 10px;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-bottom: 12px;
             border: none;
             cursor: pointer;
+            animation: pulseGlow 2.5s infinite ease-in-out;
+            transition: transform 0.1s ease;
         }
 
         .btn-contacto:active {
-            transform: scale(0.97);
+            transform: scale(0.95);
         }
 
         .whatsapp {
             background-color: #25d366;
             color: #fff;
+            animation-delay: 0s;
         }
 
         .telegram {
             background-color: #0088cc;
             color: #fff;
+            animation-delay: 0.8s;
         }
 
-        /* Botón Negro con Fueguito */
         .btn-fotos {
-            background: rgba(15, 15, 15, 0.85);
+            background: rgba(20, 20, 20, 0.9);
             color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation-delay: 1.6s;
         }
 
-        /* NOTIFICACIONES FLOTANTES TIPO IOS (ESTILO TRANSPARENTE) */
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* NOTIFICACIONES FLOTANTES TIPO IOS */
         .ios-notification {
             position: absolute;
             top: 20px;
@@ -153,10 +179,10 @@
             transform: translateX(-50%) translateY(-100px);
             width: 90%;
             max-width: 350px;
-            background: rgba(30, 30, 30, 0.75);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 12px 16px;
             display: flex;
@@ -206,7 +232,7 @@
         }
 
         .notif-body {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             font-size: 12.5px;
             line-height: 1.3;
         }
@@ -217,18 +243,18 @@
             margin-top: 2px;
         }
 
-        /* Ubicación abajo */
         .location-footer {
-            margin-top: 15px;
-            color: rgba(255, 255, 255, 0.7);
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.85);
             font-size: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 5px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
-        /* VENTANA DESLIZANTE DE CATÁLOGO LATERAL */
+        /* VENTANA DESLIZANTE LATERAL DE CATÁLOGO */
         .catalog-drawer {
             position: fixed;
             top: 0;
@@ -237,8 +263,8 @@
             max-width: 400px;
             height: 100%;
             background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             z-index: 100;
             box-shadow: -10px 0 30px rgba(0,0,0,0.8);
             transition: right 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
@@ -293,6 +319,8 @@
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.2);
             background: rgba(255,255,255,0.05);
+            cursor: pointer;
+            position: relative;
         }
 
         .catalog-item img {
@@ -302,29 +330,96 @@
             transition: transform 0.3s ease;
         }
 
-        .catalog-item img:active {
-            transform: scale(1.05);
+        /* MODAL DE FOTO ESTABILIZADA CON BOTÓN DE CITA */
+        .photo-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content-wrapper {
+            max-width: 360px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .modal-img {
+            width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-cita {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            border: none;
+            cursor: pointer;
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <!-- NOTIFICACIÓN FLOTANTE (ESTILO IOS) -->
+    <!-- NOTIFICACIÓN FLOTANTE TIPO IOS -->
     <div id="iosNotif" class="ios-notification">
         <img id="notifImg" class="notif-avatar" src="cliente1.jpg" alt="Cliente">
         <div class="notif-content">
             <div class="notif-header">
-                <span class="notif-title" id="notifName">Reseña Verificada</span>
+                <span class="notif-title" id="notifName">Recomendación</span>
                 <span class="notif-time">hace un momento</span>
             </div>
-            <div class="notif-body" id="notifText">qué buen servicio, la chica muy limpia y atiende súper bien 💯</div>
+            <div class="notif-body" id="notifText">100% real y confiable, la atención es excelente 💯</div>
             <div class="notif-stars">⭐⭐⭐⭐⭐</div>
         </div>
     </div>
 
     <div class="main-container">
         <div class="profile-card">
-            <!-- Foto de perfil central (perfil.jpg) -->
+            <!-- Foto de perfil central -->
             <div class="avatar-container">
                 <img src="perfil.jpg" alt="Valeria Diaz">
             </div>
@@ -335,17 +430,19 @@
             </div>
             <p class="bio">Contáctame aquí ✨</p>
 
-            <!-- Botón WhatsApp -->
+            <!-- Botón WhatsApp con latido e icono -->
             <a href="https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20tu%20perfil%20y%20me%20gustaría%20más%20información." class="btn-contacto whatsapp" target="_blank">
+                <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2M12.04 3.65c2.24 0 4.35.87 5.93 2.45a8.38 8.38 0 0 1 2.46 5.93c0 4.63-3.78 8.41-8.41 8.41-1.51 0-2.98-.41-4.27-1.19l-.3-.18-3.15.83.84-3.07-.2-.32a8.34 8.34 0 0 1-1.28-4.43c0-4.63 3.78-8.41 8.41-8.41m4.74 10.16c-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.58.13-.17.26-.67.85-.82 1.03-.15.17-.31.2-.57.07-.26-.13-1.1-.4-2.1-1.3-.78-.69-1.31-1.54-1.46-1.8-.15-.26-.02-.4.11-.53.11-.11.26-.29.39-.44.13-.15.17-.26.26-.43.09-.17.04-.31-.02-.44-.06-.13-.58-1.4-.8-1.92-.22-.51-.44-.44-.6-.45h-.51c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.13.17 1.75 2.67 4.24 3.74.59.26 1.05.42 1.41.54.59.19 1.13.16 1.55.1.47-.07 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.07-.11-.24-.17-.5-.3Z"/></svg>
                 <span>Escríbeme al WhatsApp</span>
             </a>
 
-            <!-- Botón Telegram -->
+            <!-- Botón Telegram con latido e icono -->
             <a href="https://t.me/valerydia" class="btn-contacto telegram" target="_blank">
+                <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.85 1.18-5.23 3.48-.49.34-.94.51-1.34.5-.44-.01-1.28-.24-1.9-.44-.77-.24-1.37-.37-1.32-.78.03-.22.33-.44.94-.67 3.7-1.61 6.17-2.67 7.41-3.18 3.53-1.47 4.26-1.73 4.73-1.74.1 0 .33.02.48.15.12.1.15.23.17.33 0 .02.01.2-.02.43Z"/></svg>
                 <span>Escríbeme al Telegram</span>
             </a>
 
-            <!-- Botón Negro con Fueguito para abrir el catálogo -->
+            <!-- Botón Mis fotos con latido -->
             <button class="btn-contacto btn-fotos" onclick="toggleCatalog()">
                 <span>Mis fotos 🔥</span>
             </button>
@@ -363,49 +460,73 @@
             <button class="close-btn" onclick="toggleCatalog()">✕</button>
         </div>
         <div class="catalog-body" id="catalogGrid">
-            <!-- Las 18 fotos se cargarán automáticamente aquí -->
+            <!-- Las 18 fotos -->
+        </div>
+    </div>
+
+    <!-- MODAL DE FOTO ESTABILIZADA CON BOTÓN DE CITA -->
+    <div id="photoModal" class="photo-modal">
+        <button class="modal-close" onclick="closePhotoModal()">✕</button>
+        <div class="modal-content-wrapper">
+            <img id="modalImage" class="modal-img" src="" alt="Foto ampliada">
+            <a id="modalWhatsAppBtn" class="btn-cita" href="#" target="_blank">
+                <span>Quiero separar una cita contigo 💋</span>
+            </a>
         </div>
     </div>
 
     <script>
-        // Lista de las 18 clientas con nombres y frases orientadas a confianza y juego mental
         const reseñasPool = [
-            { name: "Lucía M.", text: "qué buen servicio, la chica muy limpia y atiende súper bien 💯", foto: "cliente1.jpg" },
-            { name: "Camila R.", text: "sí cumple totalmente con lo que ves, 100% recomendada ✨", foto: "cliente2.jpg" },
-            { name: "Andrea P.", text: "me deja bien verificada y segura, la mejor atención de todas 🔥", foto: "cliente3.jpg" },
-            { name: "Mariana G.", text: "súper puntual y confiable, te da mucha tranquilidad desde el inicio", foto: "cliente4.jpg" },
-            { name: "Valeria S.", text: "la atencion es impecable, muy educada y pulida en todo 👌", foto: "cliente5.jpg" },
-            { name: "Daniela T.", text: "sin rodeos ni engaños, tal cual como aparece en las fotos real", foto: "cliente6.jpg" },
-            { name: "Sofía L.", text: "me encantó el trato, muy profesional y un lugar super limpio ✨", foto: "cliente7.jpg" },
-            { name: "Paola B.", text: "la recomiendo a ojos cerrados, te da una confianza tremenda", foto: "cliente8.jpg" },
-            { name: "Fernanda C.", text: "exelente servicio, muy atenta a cada detalle y super higiénico 💎", foto: "cliente9.jpg" },
-            { name: "Brenda V.", text: "fui por recomendación y la verdad superó mis expectativas", foto: "cliente10.jpg" },
-            { name: "Jimena Z.", text: "muy agradable y respetuosa, te hace sentir súper cómoda", foto: "cliente11.jpg" },
-            { name: "Alejandra M.", text: "atención de primera y súper discreta, totalmente de confianza 🤍", foto: "cliente12.jpg" },
-            { name: "Carla N.", text: "la mejor experiencia, cero problemas y muy profesional en todo", foto: "cliente13.jpg" },
-            { name: "Tatiana R.", text: "te deja con una seguridad increíble, cumple con todo lo dicho ⭐", foto: "cliente14.jpg" },
-            { name: "Natalia D.", text: "muy buen trato, limpieza absoluta y excelente ubicación", foto: "cliente15.jpg" },
-            { name: "Claudia S.", text: "super recomendada, te da esa confianza que uno busca al toque 💯", foto: "cliente16.jpg" },
-            { name: "Melissa F.", text: "atención rápida, limpia y muy amable de verdad, un 10/10", foto: "cliente17.jpg" },
-            { name: "Rossana P.", text: "todo conforme y muy seguro, sin duda volveré a escribirle 👑", foto: "cliente18.jpg" }
+            { name: "Carlos M.", text: "100% real y confiable, la atención es excelente 💯", foto: "cliente1.jpg" },
+            { name: "Luis R.", text: "muy atenta y puntual, cumple con todo lo dicho ✨", foto: "cliente2.jpg" },
+            { name: "Diego P.", text: "la mejor experiencia, totalmente recomendada y segura 🔥", foto: "cliente3.jpg" },
+            { name: "Jorge G.", text: "súper profesional y un trato muy agradable, de confianza", foto: "cliente4.jpg" },
+            { name: "Miguel S.", text: "impecable en todo sentido, super recomendada 👌", foto: "cliente5.jpg" },
+            { name: "Alejandro T.", text: "sin rodeos ni engaños, tal cual como ves en el perfil", foto: "cliente6.jpg" },
+            { name: "Fernando L.", text: "excelente servicio y una atención de primera ✨", foto: "cliente7.jpg" },
+            { name: "Gabriel B.", text: "la recomiendo a ojos cerrados, total discreción", foto: "cliente8.jpg" },
+            { name: "Ricardo C.", text: "muy pulida y atenta a cada detalle, un 10/10 💎", foto: "cliente9.jpg" },
+            { name: "Mateo V.", text: "superó mis expectativas, muy buena onda", foto: "cliente10.jpg" },
+            { name: "Daniel Z.", text: "agradable y respetuosa, te hace sentir cómodo de inmediato", foto: "cliente11.jpg" },
+            { name: "Andrés M.", text: "atención rápida y muy segura, totalmente de confianza 🤍", foto: "cliente12.jpg" },
+            { name: "Rodrigo N.", text: "cero problemas y muy profesional en todo momento", foto: "cliente13.jpg" },
+            { name: "Sebastián R.", text: "te da una seguridad increíble, cumple con todo ⭐", foto: "cliente14.jpg" },
+            { name: "Raúl D.", text: "muy buen trato y excelente ubicación", foto: "cliente15.jpg" },
+            { name: "Bruno S.", text: "super recomendada, te da esa confianza al toque 💯", foto: "cliente16.jpg" },
+            { name: "Manuel F.", text: "atención limpia, educada y muy amable, excelente", foto: "cliente17.jpg" },
+            { name: "Enrique P.", text: "todo conforme y muy seguro, sin duda volveré a escribirle 👑", foto: "cliente18.jpg" }
         ];
 
-        // Rellenar automáticamente el catálogo lateral con las 18 fotos
         const catalogGrid = document.getElementById('catalogGrid');
-        reseñasPoolforEach = reseñasPool.forEach((item, index) => {
+        reseñasPool.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'catalog-item';
             div.innerHTML = `<img src="${item.foto}" alt="Foto ${index + 1}" loading="lazy">`;
+            div.onclick = () => openPhotoModal(item.foto);
             catalogGrid.appendChild(div);
         });
 
-        // Función para abrir/cerrar la ventana deslizante
         function toggleCatalog() {
             const drawer = document.getElementById('catalogDrawer');
             drawer.classList.toggle('open');
         }
 
-        // Función para reproducir un mini sonido de notificación sutil estilo iOS
+        function openPhotoModal(imgSrc) {
+            const modal = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalImage');
+            const waBtn = document.getElementById('modalWhatsAppBtn');
+            
+            modalImg.src = imgSrc;
+            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20esta%20foto%20en%20tu%20catálogo%20y%20quiero%20separar%20una%20cita%20contigo%20💋`;
+            
+            modal.classList.add('active');
+        }
+
+        function closePhotoModal() {
+            const modal = document.getElementById('photoModal');
+            modal.classList.remove('active');
+        }
+
         function playNotificationSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -449,14 +570,12 @@
 
             currentIndex = (currentIndex + 1) % reseñasPool.length;
             
-            // Programar el siguiente intervalo con tiempos dinámicos (entre 5 y 10 segundos) para que sea natural y escalonado
-            const tiemposEspera = [3000, 5000, 7000, 4000, 6000, 8000, 5000];
+            const tiemposEspera = [3000, 5000, 7000, 4000, 6000, 8000];
             const tiempoAleatorio = tiemposEspera[Math.floor(Math.random() * tiemposEspera.length)];
             
             setTimeout(mostrarSiguienteReseña, tiempoAleatorio + 4000);
         }
 
-        // Inicia la primera reseña a los 2 segundos exactos de abrir la página
         setTimeout(mostrarSiguienteReseña, 2000);
     </script>
 </body>
