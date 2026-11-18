@@ -3,74 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Valeria Diaz | Contacto</title>
+    <title>Valeria Diaz | Contacto Oficial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            overflow: hidden;
-        }
-
-        .page-container {
-            position: relative;
+        body {
             width: 100vw;
             height: 100vh;
             height: 100dvh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0b0b0d;
+            position: relative;
         }
 
-        .page-container img {
+        /* Fondo con tu imagen a pantalla completa sin recortes raros ni bordes */
+        .bg-image {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
+            background: url('diseno.jpg') center center / cover no-repeat;
+            filter: brightness(0.45) blur(4px);
+            transform: scale(1.05);
+            z-index: 1;
+        }
+
+        /* Contenedor principal flotante */
+        .card {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            color: #fff;
+            padding: 25px 20px;
+        }
+
+        /* Título y ubicación */
+        h1 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
+
+        .location {
+            font-size: 0.95rem;
+            color: #e0e0e0;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Foto de perfil circular con aro animado brillante */
+        .avatar-wrapper {
+            position: relative;
+            width: 125px;
+            height: 125px;
+            margin: 0 auto 14px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(45deg, #25D366, #0088cc, #25D366);
+            background-size: 200% 200%;
+            animation: glowBorder 3s ease infinite;
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.45);
+        }
+
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
             object-fit: cover;
-            display: block;
+            object-position: center 35%;
+            border: 3px solid #111;
         }
 
-        /* Zonas táctiles invisibles para los botones */
-        .interactive-link {
+        .username {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .verified {
+            color: #1DA1F2;
+            font-size: 1rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 24px;
+        }
+
+        /* Botones animados con efecto de luz y pulso */
+        .btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 16px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #fff;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Efecto de destello de luz que cruza el botón continuamente */
+        .btn::before {
+            content: '';
             position: absolute;
-            left: 18%;
-            width: 64%;
-            height: 7.5%;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            outline: none;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.45),
+                transparent
+            );
+            animation: shine 2.8s infinite ease-in-out;
         }
 
-        /* Botón de WhatsApp con protocolo nativo para abrir la App de frente */
         .btn-wa {
-            top: 57.5%;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            animation: pulseGreen 2.2s infinite;
         }
 
-        /* Botón de Telegram */
         .btn-tg {
-            top: 66.5%;
+            background: linear-gradient(135deg, #2AABEE, #229ED9);
+            animation: pulseBlue 2.2s infinite 1.1s;
+        }
+
+        .btn i {
+            font-size: 2rem;
+            margin-right: 14px;
+            animation: iconWiggle 2.5s infinite ease-in-out;
+        }
+
+        .btn-text {
+            text-align: left;
+        }
+
+        .btn-text small {
+            display: block;
+            font-size: 0.78rem;
+            opacity: 0.9;
+        }
+
+        .btn-text strong {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-note {
+            margin-top: 18px;
+            font-size: 0.95rem;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge-18 {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            backdrop-filter: blur(6px);
+        }
+
+        .badge-18 span {
+            background: #e53935;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-size: 0.75rem;
+        }
+
+        /* Animaciones */
+        @keyframes shine {
+            0% { left: -100%; }
+            45% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        @keyframes pulseGreen {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(37, 211, 102, 0.5); }
+            50% { transform: scale(1.03); box-shadow: 0 0 28px rgba(37, 211, 102, 0.85); }
+        }
+
+        @keyframes pulseBlue {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(42, 171, 238, 0.5); }
+            50% { transform: scale(1.03); box-shadow: 0 0 28px rgba(42, 171, 238, 0.85); }
+        }
+
+        @keyframes iconWiggle {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(1.1); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+        }
+
+        @keyframes glowBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="page-container">
-        <!-- Tu imagen de diseño -->
-        <img src="diseno.jpg" alt="Valeria Diaz - Contacto">
+    <div class="bg-image"></div>
 
-        <!-- Enlace nativo para abrir la App de WhatsApp directamente -->
-        <a href="whatsapp://send?phone=51999894839&text=Hola%20informacion%20%3F%20%F0%9F%99%88" 
-           class="interactive-link btn-wa"></a>
+    <div class="card">
+        <h1>Valeria Diaz</h1>
+        <div class="location">
+            <i class="fas fa-map-marker-alt"></i> Lima Miraflores
+        </div>
 
-        <!-- Enlace a Telegram -->
-        <a href="https://t.me/valerydia" 
-           class="interactive-link btn-tg" 
-           target="_blank" 
-           rel="noopener noreferrer"></a>
+        <div class="avatar-wrapper">
+            <img src="diseno.jpg" alt="Valeria Diaz">
+        </div>
+
+        <div class="username">
+            @valeria_diaz <i class="fas fa-check-circle verified"></i>
+        </div>
+        <div class="subtitle">Contáctame aquí</div>
+
+        <!-- Botón animado de WhatsApp (abre directo la app) -->
+        <a href="whatsapp://send?phone=51999894839&text=Hola%20informacion%20%3F%20%F0%9F%99%88" class="btn btn-wa">
+            <i class="fab fa-whatsapp"></i>
+            <div class="btn-text">
+                <small>Escríbeme al WhatsApp</small>
+                <strong>Contactar</strong>
+            </div>
+        </a>
+
+        <!-- Botón animado de Telegram (abre directo la app) -->
+        <a href="tg://resolve?domain=valerydia" class="btn btn-tg">
+            <i class="fab fa-telegram-plane"></i>
+            <div class="btn-text">
+                <small>Escríbeme al Telegram</small>
+                <strong>Contactar</strong>
+            </div>
+        </a>
+
+        <div class="footer-note">
+            <div><i class="fas fa-map-marked-alt"></i> Frente al Parque Kennedy</div>
+            <div class="badge-18">
+                <i class="fab fa-telegram-plane"></i> <span>+18</span>
+            </div>
+        </div>
     </div>
 
 </body>
