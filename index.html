@@ -375,7 +375,7 @@
             transform: scale(1.05);
         }
 
-        /* MODAL DE FOTO AMPLIADA */
+        /* MODAL DE FOTO AMPLIADA / CHECKOUT DE CONTENIDO Y CITAS */
         .photo-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -403,11 +403,13 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-img {
             width: 100%;
-            max-height: 48vh;
+            max-height: 40vh;
             object-fit: contain;
             border-radius: 14px;
             border: 1px solid rgba(255,255,255,0.2);
@@ -415,7 +417,57 @@
             transition: transform 0.3s ease;
         }
 
-        /* ESTILO BOTÓN COMPRAR Y SEPARAR CITA */
+        /* MINI CUADRADO DE DESCRIPCIÓN DE CONTENIDO Y CITAS */
+        .checkout-box {
+            background: rgba(25, 25, 25, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 15px;
+            width: 100%;
+            color: #fff;
+            text-align: left;
+            font-size: 13px;
+            line-height: 1.5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .checkout-box h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+            text-align: center;
+            color: #ffc107;
+        }
+
+        .checkout-box ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        .checkout-box li {
+            padding: 2px 0;
+            font-size: 13px;
+        }
+
+        .checkout-box .price-tag {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14.5px;
+            color: #25d366;
+            margin-top: 8px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 6px;
+        }
+
+        .checkout-box .cita-text {
+            white-space: pre-line;
+            font-size: 13px;
+            text-align: center;
+            color: rgba(255,255,255,0.95);
+            line-height: 1.4;
+        }
+
+        /* BOTONES DE PAGO Y ACCIÓN */
         .btn-comprar {
             position: relative;
             overflow: hidden;
@@ -436,6 +488,19 @@
             cursor: pointer;
             animation: pulseGlow 2s infinite ease-in-out;
             background-size: 200% 100%;
+        }
+
+        .btn-yape {
+            background-color: #742284 !important;
+        }
+
+        .btn-plin {
+            background-color: #00a1c9 !important;
+        }
+
+        .btn-comprobar {
+            background-color: #25d366 !important;
+            font-size: 13.5px;
         }
 
         .btn-comprar::after {
@@ -465,12 +530,13 @@
             border-radius: 50%;
             font-size: 20px;
             cursor: pointer;
+            z-index: 201;
         }
     </style>
 </head>
 <body>
 
-    <!-- ELEMENTO DE AUDIO PARA LA MÚSICA DE FONDO (Sube tu archivo como 'musica-fondo.mp3') -->
+    <!-- ELEMENTO DE AUDIO PARA LA MÚSICA DE FONDO -->
     <audio id="backgroundAudio" loop preload="auto">
         <source src="musica-fondo.mp3" type="audio/mp3">
     </audio>
@@ -516,9 +582,14 @@
                 <span>Escríbeme al Telegram</span>
             </a>
 
-            <!-- BOTÓN MIS FOTOS: AQUÍ SE ACTIVA LA MÚSICA -->
+            <!-- BOTÓN MIS FOTOS -->
             <button class="btn-contacto btn-fotos" onclick="toggleCatalog(); playBackgroundMusic();">
                 <span>Mis fotos 🔥</span>
+            </button>
+
+            <!-- BOTÓN SEPARAR CITA -->
+            <button class="btn-contacto btn-fotos" onclick="openCitaModal(); playBackgroundMusic();" style="background: rgba(180, 20, 60, 0.85); border: 1px solid rgba(255,255,255,0.4);">
+                <span>Separar cita 🔥</span>
             </button>
 
             <div class="location-footer">
@@ -536,18 +607,65 @@
         <div class="catalog-body" id="catalogGrid"></div>
     </div>
 
-    <!-- MODAL DE FOTO AMPLIADA -->
+    <!-- MODAL DE CHECKOUT: COMPRAR CONTENIDO (YAPE / PLIN) -->
     <div id="photoModal" class="photo-modal">
         <button class="modal-close" onclick="closePhotoModal()">✕</button>
         <div class="modal-content-wrapper">
             <img id="modalImage" class="modal-img" src="" alt="Foto de muestra" onclick="toggleZoom(this)">
             
-            <a id="modalWhatsAppBtn" class="btn-comprar" href="#" target="_blank">
-                <span>Comprar contenido 🛒🔥</span>
+            <div class="checkout-box">
+                <h3>⭐ Contenido personalizado ⭐</h3>
+                <ul>
+                    <li>- VIDEOS PRIVADOS 🔞</li>
+                    <li>- FOTOS ERÓTICAS 🔞</li>
+                    <li>- AUDIOS HOT 🔞</li>
+                    <li>- CHAT HOT 🔞</li>
+                    <li>- VIDEOLLAMADA HOT 🔞</li>
+                    <li>- SALUDOS PERSONALIZADOS 🔞</li>
+                </ul>
+                <div class="price-tag">PRECIO : 35 SOLES 🙈🔥</div>
+                <div style="text-align: center; font-size: 12px; color: #ccc; margin-top: 4px;">MÉTODOS DE PAGO | Yape / Plin |</div>
+            </div>
+
+            <a id="yapeContentBtn" class="btn-comprar btn-yape" href="yape://app" target="_blank">
+                <span>Pagar con Yape (35 Soles) 💜</span>
             </a>
 
-            <a id="modalCitaBtn" class="btn-comprar" href="#" target="_blank" style="animation-delay: 0.5s;">
-                <span>Separar cita 🔥</span>
+            <a id="plinContentBtn" class="btn-comprar btn-plin" href="plin://app" target="_blank">
+                <span>Pagar con Plin (35 Soles) 💙</span>
+            </a>
+
+            <a id="modalWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
+                <span>Enviar comprobante para atención 📲</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MODAL DE CHECKOUT: SEPARAR CITA (YAPE / PLIN ADELANTO 50%) -->
+    <div id="citaModal" class="photo-modal">
+        <button class="modal-close" onclick="closeCitaModal()">✕</button>
+        <div class="modal-content-wrapper">
+            <div class="checkout-box">
+                <h3>✨ Reserva de Cita Privada ✨</h3>
+                <div class="cita-text">Holii guapo, siii aqui te brindo la informacion👅
+Vajin4l - Or4l - An4l 
+1 hora = 100 soles
+Soy una chica privada A1, solo atiendo por citas
+estoy por Miraflores o voy a domicilio 💋</div>
+                <div class="price-tag">ADELANTO CITA : 50 SOLES (50% Descuento) 🙈🔥</div>
+                <div style="text-align: center; font-size: 12px; color: #ccc; margin-top: 4px;">MÉTODOS DE PAGO | Yape / Plin |</div>
+            </div>
+
+            <a id="yapeCitaBtn" class="btn-comprar btn-yape" href="yape://app" target="_blank">
+                <span>Pagar Adelanto con Yape (50 Soles) 💜</span>
+            </a>
+
+            <a id="plinCitaBtn" class="btn-comprar btn-plin" href="plin://app" target="_blank">
+                <span>Pagar Adelanto con Plin (50 Soles) 💙</span>
+            </a>
+
+            <a id="citaWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
+                <span>Enviar comprobante y separar cita 📲</span>
             </a>
         </div>
     </div>
@@ -594,19 +712,31 @@
             const modal = document.getElementById('photoModal');
             const modalImg = document.getElementById('modalImage');
             const waBtn = document.getElementById('modalWhatsAppBtn');
-            const citaBtn = document.getElementById('modalCitaBtn');
             
             modalImg.src = imgSrc;
             modalImg.style.transform = 'scale(1)';
             
-            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20esta%20foto%20en%20tu%20catálogo%20y%20quiero%20comprar%20contenido%20🛒`;
-            citaBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20tu%20perfil%20y%20quiero%20separar%20una%20cita%20🔥`;
+            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20ya%20realicé%20el%20pago%20de%2035%20soles%20por%20Yape/Plin%20para%20comprar%20contenido.%20Aquí%20está%20mi%20comprobante%20🛒🔥`;
             
             modal.classList.add('active');
         }
 
         function closePhotoModal() {
             const modal = document.getElementById('photoModal');
+            modal.classList.remove('active');
+        }
+
+        function openCitaModal() {
+            const modal = document.getElementById('citaModal');
+            const waBtn = document.getElementById('citaWhatsAppBtn');
+            
+            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20ya%20realicé%20el%20pago%20del%20adelanto%20de%2050%20soles%20por%20la%20cita.%20Aquí%20está%20mi%20comprobante%20🔥`;
+            
+            modal.classList.add('active');
+        }
+
+        function closeCitaModal() {
+            const modal = document.getElementById('citaModal');
             modal.classList.remove('active');
         }
 
@@ -620,24 +750,19 @@
             }
         }
 
-        /* CONTROL DE MÚSICA DE FONDO MUY MANIPULABLE */
+        /* CONTROL DE MÚSICA DE FONDO */
         let musicStarted = false;
         function playBackgroundMusic() {
             const bgAudio = document.getElementById('backgroundAudio');
             if (bgAudio && !musicStarted) {
-                // 🎛️ AQUÍ PUEDES MANIPULAR EL VOLUMEN (De 0.0 hasta 1.0)
-                // Por ejemplo: 0.15 es muy sutil, 0.3 es medio, 0.5 es más fuerte.
                 bgAudio.volume = 0.25; 
-
                 bgAudio.play().then(() => {
                     musicStarted = true;
-                }).catch(e => {
-                    // Manejo de seguridad del navegador
-                });
+                }).catch(e => {});
             }
         }
 
-        /* SONIDO DE ENVÍO DE MENSAJE DE WHATSAPP (iOS) */
+        /* SONIDO DE NOTIFICACIÓN DE WHATSAPP */
         function playWhatsAppSendSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
