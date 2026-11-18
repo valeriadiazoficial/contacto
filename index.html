@@ -284,6 +284,34 @@
             margin-top: 2px;
         }
 
+        /* MINI VENTANA EMERGENTE (TOAST MINIATURA) PARA COPIA DE NÚMERO */
+        .copy-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-80px);
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            z-index: 300;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .copy-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
         .location-footer {
             margin-top: 10px;
             color: rgba(255, 255, 255, 0.9);
@@ -554,6 +582,9 @@
         </div>
     </div>
 
+    <!-- VENTANA EMERGENTE (TOAST) MINIFATURA PARA COPIA EXITOSA -->
+    <div id="copyToast" class="copy-toast"></div>
+
     <div class="main-container">
         <div class="profile-card">
             <div class="avatar-container">
@@ -584,12 +615,12 @@
 
             <!-- BOTÓN MIS FOTOS -->
             <button class="btn-contacto btn-fotos" onclick="toggleCatalog(); playBackgroundMusic();">
-                <span>Mis fotos 🔥</span>
+                <span>MIS FOTOS 📸</span>
             </button>
 
             <!-- BOTÓN SEPARAR CITA -->
             <button class="btn-contacto btn-fotos" onclick="openCitaModal(); playBackgroundMusic();" style="background: rgba(180, 20, 60, 0.85); border: 1px solid rgba(255,255,255,0.4);">
-                <span>Separar cita 🔥</span>
+                <span>SEPARAR MI CITA 🍑</span>
             </button>
 
             <div class="location-footer">
@@ -624,16 +655,15 @@
                     <li>- SALUDOS PERSONALIZADOS 🔞</li>
                 </ul>
                 <div class="price-tag">PRECIO : 35 SOLES 🙈🔥</div>
-                <div style="text-align: center; font-size: 12px; color: #ccc; margin-top: 4px;">MÉTODOS DE PAGO | Yape / Plin |</div>
             </div>
 
-            <a id="yapeContentBtn" class="btn-comprar btn-yape" href="yape://app" target="_blank">
+            <button class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
                 <span>Pagar con Yape (35 Soles) 💜</span>
-            </a>
+            </button>
 
-            <a id="plinContentBtn" class="btn-comprar btn-plin" href="plin://app" target="_blank">
+            <button class="btn-comprar btn-plin" onclick="copiarNumeroYPlin('918168248', 'Plin', 'Yazmin')">
                 <span>Pagar con Plin (35 Soles) 💙</span>
-            </a>
+            </button>
 
             <a id="modalWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
                 <span>Enviar comprobante para atención 📲</span>
@@ -646,23 +676,22 @@
         <button class="modal-close" onclick="closeCitaModal()">✕</button>
         <div class="modal-content-wrapper">
             <div class="checkout-box">
-                <h3>✨ ATENCIOM PRIVADA A1✨</h3>
+                <h3>✨ ATENCION PRIVADA A1✨</h3>
                 <div class="cita-text">Holii guapo, aqui te brindo la informacion👅
 Vajin4l - Or4l - An4l 
 1 hora = 100 soles
 Soy una chica privada A1, solo atiendo por citas
 estoy por Miraflores o voy a domicilio 💋</div>
-                <div class="price-tag"> : SEPARAR MI CITA CON 50 SOLES 🙈🔥</div>
-                <div style="text-align: center; font-size: 12px; color: #ccc; margin-top: 4px;"> | MÉTODOS DE PAGO | |</div>
+                <div class="price-tag"> SEPARAR MI CITA CON 50 SOLES 🙈</div>
             </div>
 
-            <a id="yapeCitaBtn" class="btn-comprar btn-yape" href="yape://app" target="_blank">
+            <button class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
                 <span>Pagar con Yape (50 Soles) 💜</span>
-            </a>
+            </button>
 
-            <a id="plinCitaBtn" class="btn-comprar btn-plin" href="plin://app" target="_blank">
+            <button class="btn-comprar btn-plin" onclick="copiarNumeroYPlin('918168248', 'Plin', 'Yazmin')">
                 <span>Pagar con Plin (50 Soles) 💙</span>
-            </a>
+            </button>
 
             <a id="citaWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
                 <span>Enviar comprobante y separar cita 📲</span>
@@ -674,10 +703,10 @@ estoy por Miraflores o voy a domicilio 💋</div>
         const reseñasPool = [
             { name: "Carlos M.", text: "100% real y confiable, la atención es excelente 💯", foto: "cliente1.jpg" },
             { name: "Luis R.", text: "muy atenta y puntual, cumple con todo lo dicho ✨", foto: "cliente2.jpg" },
-            { name: "Diego P.", text: "la mejor experiencia, totalmente recomendada y segura 🔥", foto: "cliente3.jpg" },
+            { name: "Diego P.", text: "me enamore de ella csmr🔥", foto: "cliente3.jpg" },
             { name: "Jorge G.", text: "súper profesional y un trato muy agradable, de confianza", foto: "cliente4.jpg" },
             { name: "Miguel S.", text: "impecable en todo sentido, super recomendada 👌", foto: "cliente5.jpg" },
-            { name: "Alejandro T.", text: "sin rodeos ni engaños, tal cual como ves en el perfil", foto: "cliente6.jpg" },
+            { name: "Alejandro T.", text: "sin rodeos ni engaños, es la misma de las fotos me deja bien 10/10", foto: "cliente6.jpg" },
             { name: "Fernando L.", text: "excelente servicio y una atención de primera ✨", foto: "cliente7.jpg" },
             { name: "Gabriel B.", text: "la recomiendo a ojos cerrados, total discreción", foto: "cliente8.jpg" },
             { name: "Ricardo C.", text: "muy pulida y atenta a cada detalle, un 10/10 💎", foto: "cliente9.jpg" },
@@ -685,11 +714,11 @@ estoy por Miraflores o voy a domicilio 💋</div>
             { name: "Daniel Z.", text: "agradable y respetuosa, te hace sentir cómodo de inmediato", foto: "cliente11.jpg" },
             { name: "Andrés M.", text: "atención rápida y muy segura, totalmente de confianza 🤍", foto: "cliente12.jpg" },
             { name: "Rodrigo N.", text: "cero problemas y muy profesional en todo momento", foto: "cliente13.jpg" },
-            { name: "Sebastián R.", text: "te da una seguridad increíble, cumple con todo ⭐", foto: "cliente14.jpg" },
+            { name: "Sebastián R.", text: "te da una seguridad increíble, cumple con todo", foto: "cliente14.jpg" },
             { name: "Raúl D.", text: "muy buen trato y excelente ubicación", foto: "cliente15.jpg" },
             { name: "Bruno S.", text: "super recomendada, te da esa confianza al toque 💯", foto: "cliente16.jpg" },
             { name: "Manuel F.", text: "atención limpia, educada y muy amable, excelente", foto: "cliente17.jpg" },
-            { name: "Enrique P.", text: "todo conforme y muy seguro, sin duda volveré a escribirle 👑", foto: "cliente18.jpg" }
+            { name: "Enrique P.", text: "todo conforme , deja bien esta lokita, sin duda volveré a escribirle 👑", foto: "cliente18.jpg" }
         ];
 
         const catalogoMuestra = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
@@ -748,6 +777,27 @@ estoy por Miraflores o voy a domicilio 💋</div>
                 img.style.transform = 'scale(1.6)';
                 img.style.cursor = 'zoom-out';
             }
+        }
+
+        /* FUNCIÓN PARA COPIAR NÚMERO Y MOSTRAR TOAST MINIFATURA SUPERIOR */
+        function copiarNumeroYPlin(numero, metodo, titular) {
+            navigator.clipboard.writeText(numero).then(() => {
+                mostrarToast(`📋 ¡${metodo} copiado! (${numero} - ${titular})`);
+            }).catch(err => {
+                prompt(`Copia el número de ${metodo}:`, numero);
+            });
+        }
+
+        let toastTimeout;
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById('copyToast');
+            toast.textContent = mensaje;
+            toast.classList.add('show');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
         /* CONTROL DE MÚSICA DE FONDO */
