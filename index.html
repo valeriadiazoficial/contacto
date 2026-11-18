@@ -24,29 +24,18 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            background: #000;
+            background: #000 url('diseno.jpg') no-repeat center center / cover;
             position: relative;
         }
 
-        /* VIDEO DE FONDO DIFUMINADO */
-        .background-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            filter: blur(8px) brightness(0.75);
-            transform: scale(1.05);
-        }
-
-        /* Overlay muy sutil para oscurecer un poco el video y resaltar las letras */
+        /* EFECTO DE DIFUMINADO EN LA FOTO DE FONDO */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 1;
         }
 
@@ -109,14 +98,14 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
-        /* CHECK DE VERIFICACIÓN REAL ESTILO INSTAGRAM */
+        /* CHECK DE VERIFICACIÓN ESTILO INSTAGRAM */
         .verified-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             width: 18px;
             height: 18px;
-            color: #0095f6; /* Color azul oficial de Instagram */
+            color: #0095f6;
             flex-shrink: 0;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
         }
@@ -413,12 +402,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .modal-img {
             width: 100%;
-            max-height: 52vh;
+            max-height: 48vh;
             object-fit: contain;
             border-radius: 14px;
             border: 1px solid rgba(255,255,255,0.2);
@@ -426,6 +415,7 @@
             transition: transform 0.3s ease;
         }
 
+        /* ESTILO BOTÓN COMPRAR Y SEPARAR CITA (NEGRO CON BRILLO Y PULSO) */
         .btn-comprar {
             position: relative;
             overflow: hidden;
@@ -434,13 +424,13 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 13px;
+            padding: 12px;
             background-color: #111111;
             color: #fff;
             border-radius: 14px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14.5px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.25);
             cursor: pointer;
@@ -480,12 +470,6 @@
 </head>
 <body>
 
-    <!-- VIDEO DE FONDO EN BUCLE -->
-    <video autoplay muted loop playsinline class="background-video">
-        <source src="diseno.mp4" type="video/mp4">
-        Tu navegador no soporta videos HTML5.
-    </video>
-
     <!-- NOTIFICACIÓN FLOTANTE TIPO IOS -->
     <div id="iosNotif" class="ios-notification">
         <img id="notifImg" class="notif-avatar" src="cliente1.jpg" alt="Cliente">
@@ -507,7 +491,6 @@
 
             <div class="name-container">
                 <h1>Valeria Diaz</h1>
-                <!-- CHECK DE VERIFICACIÓN ESTILO INSTAGRAM -->
                 <span class="verified-badge" title="Cuenta verificada">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-1.9 14.7L5.6 12.2l1.4-1.4 3.1 3.1 7-7 1.4 1.4-8.4 8.4Z"/></svg>
                 </span>
@@ -547,13 +530,20 @@
         <div class="catalog-body" id="catalogGrid"></div>
     </div>
 
-    <!-- MODAL DE FOTO AMPLIADA -->
+    <!-- MODAL DE FOTO AMPLIADA CON LOS DOS BOTONES -->
     <div id="photoModal" class="photo-modal">
         <button class="modal-close" onclick="closePhotoModal()">✕</button>
         <div class="modal-content-wrapper">
             <img id="modalImage" class="modal-img" src="" alt="Foto de muestra" onclick="toggleZoom(this)">
+            
+            <!-- Botón 1: Comprar Contenido -->
             <a id="modalWhatsAppBtn" class="btn-comprar" href="#" target="_blank">
                 <span>Comprar contenido 🛒🔥</span>
+            </a>
+
+            <!-- Botón 2: Separar Cita -->
+            <a id="modalCitaBtn" class="btn-comprar" href="#" target="_blank" style="animation-delay: 0.5s;">
+                <span>Separar cita 🔥</span>
             </a>
         </div>
     </div>
@@ -600,10 +590,13 @@
             const modal = document.getElementById('photoModal');
             const modalImg = document.getElementById('modalImage');
             const waBtn = document.getElementById('modalWhatsAppBtn');
+            const citaBtn = document.getElementById('modalCitaBtn');
             
             modalImg.src = imgSrc;
             modalImg.style.transform = 'scale(1)';
+            
             waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20esta%20foto%20en%20tu%20catálogo%20y%20quiero%20comprar%20contenido%20🛒`;
+            citaBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20tu%20perfil%20y%20quiero%20separar%20una%20cita%20🔥`;
             
             modal.classList.add('active');
         }
@@ -628,11 +621,10 @@
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 
-                // Primer tono (bip agudo inicial)
                 const osc1 = audioCtx.createOscillator();
                 const gain1 = audioCtx.createGain();
                 osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(1760, audioCtx.currentTime); // A6
+                osc1.frequency.setValueAtTime(1760, audioCtx.currentTime);
                 gain1.gain.setValueAtTime(0.12, audioCtx.currentTime);
                 gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
                 osc1.connect(gain1);
@@ -640,11 +632,10 @@
                 osc1.start();
                 osc1.stop(audioCtx.currentTime + 0.05);
 
-                // Segundo tono (bip de confirmación más alto)
                 const osc2 = audioCtx.createOscillator();
                 const gain2 = audioCtx.createGain();
                 osc2.type = 'sine';
-                osc2.frequency.setValueAtTime(2637.02, audioCtx.currentTime + 0.06); // E7
+                osc2.frequency.setValueAtTime(2637.02, audioCtx.currentTime + 0.06);
                 gain2.gain.setValueAtTime(0.15, audioCtx.currentTime + 0.06);
                 gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.14);
                 osc2.connect(gain2);
@@ -661,11 +652,8 @@
         const notifText = document.getElementById('notifText');
 
         function mostrarSiguienteReseña() {
-            // Si ya está visible, hacemos un desvanecimiento rápido antes de cambiar el contenido
             if (notifElement.classList.contains('show')) {
                 notifElement.classList.remove('show');
-                
-                // Esperamos un breve instante (200ms) para que se note la transición difuminada
                 setTimeout(() => {
                     actualizarYMostrarNotif();
                 }, 200);
@@ -689,7 +677,6 @@
             const tiemposEspera = [4000, 6000, 8000, 5000, 7000];
             const tiempoAleatorio = tiemposEspera[Math.floor(Math.random() * tiemposEspera.length)];
             
-            // Programamos el siguiente cambio de reseña
             setTimeout(mostrarSiguienteReseña, tiempoAleatorio + 4000);
         }
 
