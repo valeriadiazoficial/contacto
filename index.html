@@ -212,12 +212,12 @@
             fill: currentColor;
         }
 
-        /* NOTIFICACIONES FLOTANTES TIPO IOS CON TRANSICIÓN DIFUMINADA */
+        /* NOTIFICACIONES FLOTANTES TIPO IOS SIN LATENCIA (APARICIÓN INSTANTÁNEA) */
         .ios-notification {
             position: absolute;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%) translateY(-100px);
+            transform: translateX(-50%) translateY(-120px);
             width: 90%;
             max-width: 350px;
             background: rgba(20, 20, 20, 0.85);
@@ -232,8 +232,9 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 10;
             opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+            transition: transform 0.15s ease-out, opacity 0.15s ease-out; /* Transición súper rápida sin lag */
             pointer-events: none;
+            will-change: transform, opacity;
         }
 
         .ios-notification.show {
@@ -569,12 +570,18 @@
         <source src="musica-fondo.mp3" type="audio/mp3">
     </audio>
 
+    <!-- ELEMENTO DE AUDIO PARA EL SONIDO DE NOTIFICACIÓN PERSONALIZADO -->
+    <!-- SUGERENCIA DE NOMBRE: Ponle "notificacion.mp3" y súbelo junto a tus archivos -->
+    <audio id="notifSound" preload="auto">
+        <source src="notificacion.mp3" type="audio/mp3">
+    </audio>
+
     <!-- NOTIFICACIÓN FLOTANTE TIPO IOS -->
     <div id="iosNotif" class="ios-notification">
         <img id="notifImg" class="notif-avatar" src="cliente1.jpg" alt="Cliente">
         <div class="notif-content">
             <div class="notif-header">
-                <span class="notif-title" id="notifName">Recomendación</span>
+                <span class="notif-title" id="notifName">Reseña verídica</span> <!-- Nombre actualizado -->
                 <span class="notif-time">hace un momento</span>
             </div>
             <div class="notif-body" id="notifText">100% real y confiable, la atención es excelente 💯</div>
@@ -812,33 +819,29 @@ estoy por Miraflores o voy a domicilio 💋</div>
             }
         }
 
-        /* SONIDO DE NOTIFICACIÓN DE WHATSAPP */
-        function playWhatsAppSendSound() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                
-                const osc1 = audioCtx.createOscillator();
-                const gain1 = audioCtx.createGain();
-                osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(1760, audioCtx.currentTime);
-                gain1.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-                osc1.connect(gain1);
-                gain1.connect(audioCtx.destination);
-                osc1.start();
-                osc1.stop(audioCtx.currentTime + 0.05);
-
-                const osc2 = audioCtx.createOscillator();
-                const gain2 = audioCtx.createGain();
-                osc2.type = 'sine';
-                osc2.frequency.setValueAtTime(2637.02, audioCtx.currentTime + 0.06);
-                gain2.gain.setValueAtTime(0.15, audioCtx.currentTime + 0.06);
-                gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.14);
-                osc2.connect(gain2);
-                gain2.connect(audioCtx.destination);
-                osc2.start(audioCtx.currentTime + 0.06);
-                osc2.stop(audioCtx.currentTime + 0.14);
-            } catch (e) {}
+        /* REPRODUCIR SONIDO DE NOTIFICACIÓN PERSONALIZADO (archivo: notificacion.mp3) */
+        function playCustomNotificationSound() {
+            const customSound = document.getElementById('notifSound');
+            if (customSound) {
+                customSound.currentTime = 0;
+                customSound.volume = 0.8;
+                customSound.play().catch(e => {
+                    // Respaldo de emergencia por si el navegador bloquea el archivo local
+                    try {
+                        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+                        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start();
+                        osc.stop(audioCtx.currentTime + 0.15);
+                    } catch (err) {}
+                });
+            }
         }
 
         let currentIndex = 0;
@@ -852,7 +855,7 @@ estoy por Miraflores o voy a domicilio 💋</div>
                 notifElement.classList.remove('show');
                 setTimeout(() => {
                     actualizarYMostrarNotif();
-                }, 200);
+                }, 50); // Reducido al mínimo para transiciones instantáneas
             } else {
                 actualizarYMostrarNotif();
             }
@@ -862,10 +865,10 @@ estoy por Miraflores o voy a domicilio 💋</div>
             const item = reseñasPool[currentIndex];
             
             notifImg.src = item.foto;
-            notifName.textContent = item.name + " (Recomendación)";
+            notifName.textContent = item.name + " (Reseña verídica)"; // Nombre cambiado en la cabecera de la noti
             notifText.textContent = item.text;
 
-            playWhatsAppSendSound();
+            playCustomNotificationSound(); // Llama a tu audio personalizado
             notifElement.classList.add('show');
 
             currentIndex = (currentIndex + 1) % reseñasPool.length;
@@ -876,7 +879,7 @@ estoy por Miraflores o voy a domicilio 💋</div>
             setTimeout(mostrarSiguienteReseña, tiempoAleatorio + 4000);
         }
 
-        setTimeout(mostrarSiguienteReseña, 2000);
+        setTimeout(mostrarSiguienteReseña, 1500);
     </script>
 </body>
 </html>
