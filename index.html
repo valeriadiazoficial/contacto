@@ -9,71 +9,67 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; /* Elimina el cuadro gris/transparente al tocar en celulares */
+            -webkit-tap-highlight-color: transparent;
         }
 
         html, body {
             width: 100%;
-            height: 100vh;
-            height: 100dvh;
+            height: 100%;
             background-color: #000;
-            overflow: hidden; /* Evita que la página se deslice */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden;
         }
 
         .page-container {
             position: relative;
-            width: 100%;
-            height: 100%;
-            max-width: 480px; /* Se adapta perfecto al ancho del celular en pantalla completa */
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
         }
 
         .page-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* La foto llena toda la pantalla sin deformarse */
+            object-fit: cover; /* Llena toda la pantalla perfectamente a escala completa */
             display: block;
         }
 
         /* Zonas táctiles invisibles para los botones */
         .interactive-link {
             position: absolute;
-            left: 15%;
-            width: 70%;
-            height: 8.5%;
+            left: 18%;
+            width: 64%;
+            height: 7.5%;
             cursor: pointer;
             background: transparent;
             border: none;
             outline: none;
         }
 
-        /* Posición exacta sobre el botón verde de WhatsApp */
+        /* Botón de WhatsApp */
         .btn-wa {
-            top: 59.5%;
+            top: 57.5%;
         }
 
-        /* Posición exacta sobre el botón azul de Telegram */
+        /* Botón de Telegram con tu usuario correcto */
         .btn-tg {
-            top: 69.5%;
+            top: 66.5%;
         }
     </style>
 </head>
 <body>
 
     <div class="page-container">
-        <!-- Tu imagen de diseño en pantalla completa -->
+        <!-- Tu imagen de diseño -->
         <img src="diseno.jpg" alt="Valeria Diaz - Contacto">
 
-        <!-- Enlace a WhatsApp con mensaje automático -->
+        <!-- Enlace a WhatsApp -->
         <a href="https://wa.me/51999894839?text=Hola%20informacion%20%3F%20%F0%9F%99%88" 
            class="interactive-link btn-wa" 
            target="_blank" 
            rel="noopener noreferrer"></a>
 
         <!-- Enlace a Telegram corregido -->
-        <a href="https://t.me/valery_dia" 
+        <a href="https://t.me/valerydia" 
            class="interactive-link btn-tg" 
            target="_blank" 
            rel="noopener noreferrer"></a>
