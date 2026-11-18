@@ -276,13 +276,13 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
-        /* VENTANA DESLIZANTE LATERAL DE CATÁLOGO (4 fotos) */
+        /* VENTANA DESLIZANTE LATERAL DE CATÁLOGO (Compacta) */
         .catalog-drawer {
             position: fixed;
             top: 0;
             right: -100%;
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             height: 100%;
             background: rgba(15, 15, 15, 0.95);
             backdrop-filter: blur(20px);
@@ -299,7 +299,7 @@
         }
 
         .catalog-header {
-            padding: 20px;
+            padding: 18px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -308,7 +308,7 @@
 
         .catalog-title {
             color: #fff;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
         }
 
@@ -316,10 +316,10 @@
             background: rgba(255,255,255,0.1);
             border: none;
             color: #fff;
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -327,17 +327,18 @@
         }
 
         .catalog-body {
-            padding: 20px;
+            padding: 15px;
             overflow-y: auto;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 10px;
             flex-grow: 1;
         }
 
+        /* Cuadrícula compacta de fotos */
         .catalog-item {
-            aspect-ratio: 1/1;
-            border-radius: 12px;
+            aspect-ratio: 4/5;
+            border-radius: 10px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.2);
             background: rgba(255,255,255,0.05);
@@ -352,7 +353,11 @@
             transition: transform 0.3s ease;
         }
 
-        /* MODAL DE FOTO CON ZOOM Y BOTÓN DE COMPRAR */
+        .catalog-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* MODAL DE FOTO CON ZOOM Y BOTÓN DE COMPRAR NEGRO CON BRILLO */
         .photo-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -374,7 +379,7 @@
         }
 
         .modal-content-wrapper {
-            max-width: 360px;
+            max-width: 340px;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -384,14 +389,15 @@
 
         .modal-img {
             width: 100%;
-            max-height: 55vh;
+            max-height: 52vh;
             object-fit: contain;
-            border-radius: 16px;
+            border-radius: 14px;
             border: 1px solid rgba(255,255,255,0.2);
             cursor: zoom-in;
             transition: transform 0.3s ease;
         }
 
+        /* NUEVO ESTILO: BOTÓN NEGRO CON EFECTO DE BRILLO Y PULSO */
         .btn-comprar {
             position: relative;
             overflow: hidden;
@@ -400,15 +406,15 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 14px;
-            background-color: #25d366;
+            padding: 13px;
+            background-color: #111111;
             color: #fff;
             border-radius: 14px;
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            border: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             cursor: pointer;
             animation: pulseGlow 2s infinite ease-in-out;
             background-size: 200% 100%;
@@ -495,10 +501,10 @@
         </div>
     </div>
 
-    <!-- VENTANA DESLIZANTE DE CATÁLOGO (4 fotos: foto1.jpg a foto4.jpg) -->
+    <!-- VENTANA DESLIZANTE DE CATÁLOGO (Servicios y contenido 🔥) -->
     <div id="catalogDrawer" class="catalog-drawer">
         <div class="catalog-header">
-            <span class="catalog-title">Catálogo de Muestra 📸</span>
+            <span class="catalog-title">Servicio y contenido 🔥</span>
             <button class="close-btn" onclick="toggleCatalog()">✕</button>
         </div>
         <div class="catalog-body" id="catalogGrid">
@@ -506,7 +512,7 @@
         </div>
     </div>
 
-    <!-- MODAL DE FOTO AMPLIADA + ZOOM + BOTÓN "COMPRAR CONTENIDO" -->
+    <!-- MODAL DE FOTO AMPLIADA + ZOOM + BOTÓN "COMPRAR CONTENIDO" NEGRO CON BRILLO -->
     <div id="photoModal" class="photo-modal">
         <button class="modal-close" onclick="closePhotoModal()">✕</button>
         <div class="modal-content-wrapper">
