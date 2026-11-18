@@ -1,308 +1,463 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>     <!-- Etiquetas actualizadas para la vista previa en WhatsApp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valeria Diaz Oficial | Contacto</title>
+    
+    <!-- Open Graph para WhatsApp y Redes Sociales -->
     <meta property="og:title" content="Valeria Diaz | Contacto Oficial">
-    <meta property="og:description" content="Escríbeme directo a mi WhatsApp o Telegram. ¡Contáctame aquí!">
-    <meta property="og:image" content="https://valeriadiazoficial.github.io/contacto/perfil.jpg">
-    <meta property="og:url" content="https://valeriadiazoficial.github.io/contacto/">
+    <meta property="og:description" content="Escríbeme directo al WhatsApp o Telegram. Atencion personalizada y verificada.">
+    <meta property="og:image" content="https://valeriadiazoficial.github.io/contacto/diseno.jpg">
+    <meta property="og:url" content="https://valeriadiazoficial.github.io/contacto">
     <meta property="og:type" content="website">
 
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Valeria Diaz | Contacto Oficial</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             width: 100vw;
             height: 100vh;
-            height: 100dvh;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #0b0b0d;
+            background: #000 url('diseno.jpg') no-repeat center center / cover;
             position: relative;
         }
 
-        /* Fondo con tu imagen de diseño original (diseno.jpg) */
-        .bg-image {
+        /* Overlay oscuro para resaltar el contenido */
+        body::before {
+            content: '';
             position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            background: url('diseno.jpg') center center / cover no-repeat;
-            filter: brightness(0.4) blur(6px);
-            transform: scale(1.05);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.45);
             z-index: 1;
         }
 
-        /* Contenedor principal flotante */
-        .card {
+        /* Contenedor principal centrado */
+        .main-container {
             position: relative;
             z-index: 2;
-            width: 90%;
-            max-width: 380px;
-            text-align: center;
-            color: #fff;
-            padding: 25px 20px;
-        }
-
-        /* Título y ubicación */
-        h1 {
-            font-size: 2.1rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 6px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
-        }
-
-        .location {
-            font-size: 0.95rem;
-            color: #e0e0e0;
-            margin-bottom: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        /* Foto de perfil circular nítida con tu nueva foto (perfil.jpg) */
-        .avatar-wrapper {
-            position: relative;
-            width: 135px;
-            height: 135px;
-            margin: 0 auto 14px;
-            border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(45deg, #25D366, #0088cc, #25D366);
-            background-size: 200% 200%;
-            animation: glowBorder 3s ease infinite;
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.45);
-        }
-
-        .avatar-wrapper img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center top;
-            border: 3px solid #111;
-            display: block;
-        }
-
-        .username {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 4px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            gap: 6px;
-        }
-
-        .verified {
-            color: #1DA1F2;
-            font-size: 1rem;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            color: #ccc;
-            margin-bottom: 24px;
-        }
-
-        /* Botones animados con efecto de luz y pulso */
-        .btn {
-            position: relative;
-            display: flex;
             align-items: center;
-            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Tarjeta de perfil central tipo cristal */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 25px 20px;
             width: 100%;
-            padding: 15px 20px;
-            margin-bottom: 16px;
-            border-radius: 16px;
-            text-decoration: none;
-            color: #fff;
+            max-width: 360px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .avatar-container {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 12px auto;
+            border-radius: 50%;
             overflow: hidden;
-            transition: transform 0.2s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .name-container h1 {
+            color: #fff;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .verified-badge {
+            color: #1d9bf0;
+            font-size: 17px;
+        }
+
+        .bio {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13.5px;
+            margin-bottom: 20px;
+        }
+
+        /* Botones de contacto y catálogo */
+        .btn-contacto {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 13px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 10px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: none;
             cursor: pointer;
         }
 
-        .btn:active {
-            transform: scale(0.96);
+        .btn-contacto:active {
+            transform: scale(0.97);
         }
 
-        .btn::before {
-            content: '';
+        .whatsapp {
+            background-color: #25d366;
+            color: #fff;
+        }
+
+        .telegram {
+            background-color: #0088cc;
+            color: #fff;
+        }
+
+        /* Botón Negro con Fueguito */
+        .btn-fotos {
+            background: rgba(15, 15, 15, 0.85);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* NOTIFICACIONES FLOTANTES TIPO IOS (ESTILO TRANSPARENTE) */
+        .ios-notification {
             position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            width: 90%;
+            max-width: 350px;
+            background: rgba(30, 30, 30, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        .ios-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .notif-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .notif-content {
+            flex-grow: 1;
+        }
+
+        .notif-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+
+        .notif-title {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .notif-time {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+        }
+
+        .notif-body {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 12.5px;
+            line-height: 1.3;
+        }
+
+        .notif-stars {
+            color: #ffc107;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        /* Ubicación abajo */
+        .location-footer {
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* VENTANA DESLIZANTE DE CATÁLOGO LATERAL */
+        .catalog-drawer {
+            position: fixed;
             top: 0;
-            left: -100%;
-            width: 60%;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
             height: 100%;
-            background: linear-gradient(
-                120deg,
-                transparent,
-                rgba(255, 255, 255, 0.45),
-                transparent
-            );
-            animation: shine 2.8s infinite ease-in-out;
-        }
-
-        .btn-wa {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            animation: pulseGreen 2.2s infinite;
-        }
-
-        .btn-tg {
-            background: linear-gradient(135deg, #2AABEE, #229ED9);
-            animation: pulseBlue 2.2s infinite 1.1s;
-        }
-
-        .btn i {
-            font-size: 2rem;
-            margin-right: 14px;
-            animation: iconWiggle 2.5s infinite ease-in-out;
-        }
-
-        .btn-text {
-            text-align: left;
-        }
-
-        .btn-text small {
-            display: block;
-            font-size: 0.78rem;
-            opacity: 0.9;
-        }
-
-        .btn-text strong {
-            display: block;
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: 0.3px;
-        }
-
-        .footer-note {
-            margin-top: 18px;
-            font-size: 0.95rem;
-            color: #e0e0e0;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 100;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            transition: right 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 8px;
         }
 
-        .badge-18 {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.12);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            backdrop-filter: blur(6px);
+        .catalog-drawer.open {
+            right: 0;
         }
 
-        .badge-18 span {
-            background: #e53935;
+        .catalog-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .catalog-title {
             color: #fff;
-            padding: 2px 6px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            font-size: 0.75rem;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Animaciones */
-        @keyframes shine {
-            0% { left: -100%; }
-            45% { left: 150%; }
-            100% { left: 150%; }
+        .catalog-body {
+            padding: 20px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            flex-grow: 1;
         }
 
-        @keyframes pulseGreen {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(37, 211, 102, 0.5); }
-            50% { transform: scale(1.03); box-shadow: 0 0 28px rgba(37, 211, 102, 0.85); }
+        .catalog-item {
+            aspect-ratio: 1/1;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
         }
 
-        @keyframes pulseBlue {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(42, 171, 238, 0.5); }
-            50% { transform: scale(1.03); box-shadow: 0 0 28px rgba(42, 171, 238, 0.85); }
+        .catalog-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        @keyframes iconWiggle {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(-10deg) scale(1.1); }
-            50% { transform: rotate(10deg) scale(1.1); }
-            75% { transform: rotate(-5deg) scale(1.05); }
-        }
-
-        @keyframes glowBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .catalog-item img:active {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-image"></div>
-
-    <div class="card">
-        <h1>Valeria Diaz</h1>
-        <div class="location">
-            <i class="fas fa-map-marker-alt"></i> Lima Miraflores
-        </div>
-
-        <div class="avatar-wrapper">
-            <!-- Tu foto nueva de perfil nítida -->
-            <img src="perfil.jpg" alt="Valeria Diaz">
-        </div>
-
-        <div class="username">
-            @valeria_diaz <i class="fas fa-check-circle verified"></i>
-        </div>
-        <div class="subtitle">Contáctame aquí</div>
-
-        <!-- Botón de WhatsApp con enlace directo universal -->
-        <a href="https://wa.me/51999894839?text=Hola%20informacion%20%3F%20%F0%9F%99%88" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="btn btn-wa">
-            <i class="fab fa-whatsapp"></i>
-            <div class="btn-text">
-                <small>Escríbeme al WhatsApp</small>
-                <strong>Contactar</strong>
+    <!-- NOTIFICACIÓN FLOTANTE (ESTILO IOS) -->
+    <div id="iosNotif" class="ios-notification">
+        <img id="notifImg" class="notif-avatar" src="cliente1.jpg" alt="Cliente">
+        <div class="notif-content">
+            <div class="notif-header">
+                <span class="notif-title" id="notifName">Reseña Verificada</span>
+                <span class="notif-time">hace un momento</span>
             </div>
-        </a>
+            <div class="notif-body" id="notifText">qué buen servicio, la chica muy limpia y atiende súper bien 💯</div>
+            <div class="notif-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+    </div>
 
-        <!-- Botón de Telegram con enlace directo universal -->
-        <a href="https://t.me/valerydia" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="btn btn-tg">
-            <i class="fab fa-telegram-plane"></i>
-            <div class="btn-text">
-                <small>Escríbeme al Telegram</small>
-                <strong>Contactar</strong>
+    <div class="main-container">
+        <div class="profile-card">
+            <!-- Foto de perfil central (perfil.jpg) -->
+            <div class="avatar-container">
+                <img src="perfil.jpg" alt="Valeria Diaz">
             </div>
-        </a>
 
-        <div class="footer-note">
-            <div><i class="fas fa-map-marked-alt"></i> Frente al Parque Kennedy</div>
-            <div class="badge-18">
-                <i class="fab fa-telegram-plane"></i> <span>+18</span>
+            <div class="name-container">
+                <h1>Valeria Diaz</h1>
+                <span class="verified-badge">✔</span>
+            </div>
+            <p class="bio">Contáctame aquí ✨</p>
+
+            <!-- Botón WhatsApp -->
+            <a href="https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20tu%20perfil%20y%20me%20gustaría%20más%20información." class="btn-contacto whatsapp" target="_blank">
+                <span>Escríbeme al WhatsApp</span>
+            </a>
+
+            <!-- Botón Telegram -->
+            <a href="https://t.me/valerydia" class="btn-contacto telegram" target="_blank">
+                <span>Escríbeme al Telegram</span>
+            </a>
+
+            <!-- Botón Negro con Fueguito para abrir el catálogo -->
+            <button class="btn-contacto btn-fotos" onclick="toggleCatalog()">
+                <span>Mis fotos 🔥</span>
+            </button>
+
+            <div class="location-footer">
+                📍 Frente al Parque Kennedy
             </div>
         </div>
     </div>
 
+    <!-- VENTANA DESLIZANTE LATERAL DE CATÁLOGO (18 FOTOS) -->
+    <div id="catalogDrawer" class="catalog-drawer">
+        <div class="catalog-header">
+            <span class="catalog-title">Galería & Reseñas 📸</span>
+            <button class="close-btn" onclick="toggleCatalog()">✕</button>
+        </div>
+        <div class="catalog-body" id="catalogGrid">
+            <!-- Las 18 fotos se cargarán automáticamente aquí -->
+        </div>
+    </div>
+
+    <script>
+        // Lista de las 18 clientas con nombres y frases orientadas a confianza y juego mental
+        const reseñasPool = [
+            { name: "Lucía M.", text: "qué buen servicio, la chica muy limpia y atiende súper bien 💯", foto: "cliente1.jpg" },
+            { name: "Camila R.", text: "sí cumple totalmente con lo que ves, 100% recomendada ✨", foto: "cliente2.jpg" },
+            { name: "Andrea P.", text: "me deja bien verificada y segura, la mejor atención de todas 🔥", foto: "cliente3.jpg" },
+            { name: "Mariana G.", text: "súper puntual y confiable, te da mucha tranquilidad desde el inicio", foto: "cliente4.jpg" },
+            { name: "Valeria S.", text: "la atencion es impecable, muy educada y pulida en todo 👌", foto: "cliente5.jpg" },
+            { name: "Daniela T.", text: "sin rodeos ni engaños, tal cual como aparece en las fotos real", foto: "cliente6.jpg" },
+            { name: "Sofía L.", text: "me encantó el trato, muy profesional y un lugar super limpio ✨", foto: "cliente7.jpg" },
+            { name: "Paola B.", text: "la recomiendo a ojos cerrados, te da una confianza tremenda", foto: "cliente8.jpg" },
+            { name: "Fernanda C.", text: "exelente servicio, muy atenta a cada detalle y super higiénico 💎", foto: "cliente9.jpg" },
+            { name: "Brenda V.", text: "fui por recomendación y la verdad superó mis expectativas", foto: "cliente10.jpg" },
+            { name: "Jimena Z.", text: "muy agradable y respetuosa, te hace sentir súper cómoda", foto: "cliente11.jpg" },
+            { name: "Alejandra M.", text: "atención de primera y súper discreta, totalmente de confianza 🤍", foto: "cliente12.jpg" },
+            { name: "Carla N.", text: "la mejor experiencia, cero problemas y muy profesional en todo", foto: "cliente13.jpg" },
+            { name: "Tatiana R.", text: "te deja con una seguridad increíble, cumple con todo lo dicho ⭐", foto: "cliente14.jpg" },
+            { name: "Natalia D.", text: "muy buen trato, limpieza absoluta y excelente ubicación", foto: "cliente15.jpg" },
+            { name: "Claudia S.", text: "super recomendada, te da esa confianza que uno busca al toque 💯", foto: "cliente16.jpg" },
+            { name: "Melissa F.", text: "atención rápida, limpia y muy amable de verdad, un 10/10", foto: "cliente17.jpg" },
+            { name: "Rossana P.", text: "todo conforme y muy seguro, sin duda volveré a escribirle 👑", foto: "cliente18.jpg" }
+        ];
+
+        // Rellenar automáticamente el catálogo lateral con las 18 fotos
+        const catalogGrid = document.getElementById('catalogGrid');
+        reseñasPoolforEach = reseñasPool.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'catalog-item';
+            div.innerHTML = `<img src="${item.foto}" alt="Foto ${index + 1}" loading="lazy">`;
+            catalogGrid.appendChild(div);
+        });
+
+        // Función para abrir/cerrar la ventana deslizante
+        function toggleCatalog() {
+            const drawer = document.getElementById('catalogDrawer');
+            drawer.classList.toggle('open');
+        }
+
+        // Función para reproducir un mini sonido de notificación sutil estilo iOS
+        function playNotificationSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.08);
+                
+                gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.08);
+            } catch (e) {}
+        }
+
+        let currentIndex = 0;
+        const notifElement = document.getElementById('iosNotif');
+        const notifImg = document.getElementById('notifImg');
+        const notifName = document.getElementById('notifName');
+        const notifText = document.getElementById('notifText');
+
+        function mostrarSiguienteReseña() {
+            const item = reseñasPool[currentIndex];
+            
+            notifImg.src = item.foto;
+            notifName.textContent = item.name + " (Recomendación)";
+            notifText.textContent = item.text;
+
+            notifElement.classList.add('show');
+            playNotificationSound();
+
+            setTimeout(() => {
+                notifElement.classList.remove('show');
+            }, 4000);
+
+            currentIndex = (currentIndex + 1) % reseñasPool.length;
+            
+            // Programar el siguiente intervalo con tiempos dinámicos (entre 5 y 10 segundos) para que sea natural y escalonado
+            const tiemposEspera = [3000, 5000, 7000, 4000, 6000, 8000, 5000];
+            const tiempoAleatorio = tiemposEspera[Math.floor(Math.random() * tiemposEspera.length)];
+            
+            setTimeout(mostrarSiguienteReseña, tiempoAleatorio + 4000);
+        }
+
+        // Inicia la primera reseña a los 2 segundos exactos de abrir la página
+        setTimeout(mostrarSiguienteReseña, 2000);
+    </script>
 </body>
 </html>
