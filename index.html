@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valeria Diaz Oficial | Contacto</title>
     
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valeria Diaz Oficial | Contacto</title>
+    
     <!-- Open Graph para WhatsApp y Redes Sociales -->
     <meta property="og:title" content="Valeria Diaz | Contacto Oficial">
     <meta property="og:description" content="Escríbeme directo al WhatsApp o Telegram. Atencion personalizada y verificada.">
@@ -17,7 +24,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, "SF Pro Display", "SF Pro Text", BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
         }
 
         body {
@@ -139,6 +146,50 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.02); }
             100% { transform: scale(1); }
+        }
+
+        @keyframes contenidoPulseShine {
+            0%, 100% {
+                transform: scale(1);
+                text-shadow: 0 0 8px rgba(255, 193, 7, 0.45), 0 0 18px rgba(255, 215, 0, 0.25);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.04);
+                text-shadow: 0 0 14px rgba(255, 193, 7, 0.95), 0 0 26px rgba(255, 235, 130, 0.65);
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes productShowcase {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55), 0 0 12px rgba(255, 215, 120, 0.18);
+                filter: brightness(1);
+            }
+            50% {
+                transform: translateY(-3px) scale(1.015);
+                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7), 0 0 22px rgba(255, 225, 150, 0.42);
+                filter: brightness(1.07);
+            }
+        }
+
+        @keyframes productGlossSweep {
+            0% {
+                left: -140%;
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            55% {
+                left: 140%;
+                opacity: 0;
+            }
+            100% {
+                left: 140%;
+                opacity: 0;
+            }
         }
 
         .btn-contacto {
@@ -435,12 +486,39 @@
             overflow-y: auto;
         }
 
+        .modal-img-frame {
+            position: relative;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            animation: productShowcase 3.2s ease-in-out infinite;
+        }
+
+        .modal-img-frame::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -140%;
+            width: 90%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.28),
+                transparent
+            );
+            transform: skewX(-22deg);
+            animation: productGlossSweep 3.8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
         .modal-img {
+            display: block;
             width: 100%;
             max-height: 40vh;
             object-fit: contain;
             border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.28);
             cursor: zoom-in;
             transition: transform 0.3s ease;
         }
@@ -464,6 +542,13 @@
             margin-bottom: 8px;
             text-align: center;
             color: #ffc107;
+        }
+
+        .contenido-destacado {
+            display: inline-block;
+            color: #ffd54f;
+            font-weight: 700;
+            animation: contenidoPulseShine 2.2s ease-in-out infinite;
         }
 
         .checkout-box ul {
@@ -520,10 +605,6 @@
 
         .btn-yape {
             background-color: #742284 !important;
-        }
-
-        .btn-plin {
-            background-color: #00a1c9 !important;
         }
 
         .btn-comprobar {
@@ -643,14 +724,16 @@
         <div class="catalog-body" id="catalogGrid"></div>
     </div>
 
-    <!-- MODAL DE CHECKOUT: COMPRAR CONTENIDO (YAPE / PLIN) -->
+    <!-- MODAL DE CHECKOUT: COMPRAR CONTENIDO (YAPE) -->
     <div id="photoModal" class="photo-modal">
         <button class="modal-close" onclick="closePhotoModal()">✕</button>
         <div class="modal-content-wrapper">
-            <img id="modalImage" class="modal-img" src="" alt="Foto de muestra" onclick="toggleZoom(this)">
+            <div class="modal-img-frame">
+                <img id="modalImage" class="modal-img" src="" alt="Foto de muestra" onclick="toggleZoom(this)">
+            </div>
             
             <div class="checkout-box">
-                <h3>⭐ Contenido personalizado ⭐</h3>
+                <h3>⭐ <span class="contenido-destacado">Contenido personalizado</span> ⭐</h3>
                 <ul>
                     <li>- VIDEOS PRIVADOS 🔞</li>
                     <li>- FOTOS ERÓTICAS 🔞</li>
@@ -666,17 +749,13 @@
                 <span>Pagar con Yape (35 Soles) 💜</span>
             </button>
 
-            <button class="btn-comprar btn-plin" onclick="copiarNumeroYPlin('918168248', 'Plin', 'Yazmin')">
-                <span>Pagar con Plin (35 Soles) 💙</span>
-            </button>
-
             <a id="modalWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
                 <span>Enviar comprobante para atención 📲</span>
             </a>
         </div>
     </div>
 
-    <!-- MODAL DE CHECKOUT: SEPARAR CITA (YAPE / PLIN ADELANTO 50%) -->
+    <!-- MODAL DE CHECKOUT: SEPARAR CITA (YAPE ADELANTO 50%) -->
     <div id="citaModal" class="photo-modal">
         <button class="modal-close" onclick="closeCitaModal()">✕</button>
         <div class="modal-content-wrapper">
@@ -692,10 +771,6 @@ estoy por Miraflores o voy a domicilio 💋</div>
 
             <button class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
                 <span>Pagar con Yape (50 Soles) 💜</span>
-            </button>
-
-            <button class="btn-comprar btn-plin" onclick="copiarNumeroYPlin('918168248', 'Plin', 'Yazmin')">
-                <span>Pagar con Plin (50 Soles) 💙</span>
             </button>
 
             <a id="citaWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
@@ -750,7 +825,7 @@ estoy por Miraflores o voy a domicilio 💋</div>
             modalImg.src = imgSrc;
             modalImg.style.transform = 'scale(1)';
             
-            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20ya%20realicé%20el%20pago%20de%2035%20soles%20por%20Yape/Plin%20para%20comprar%20contenido.%20Aquí%20está%20mi%20comprobante%20🛒🔥`;
+            waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20ya%20realicé%20el%20pago%20de%2035%20soles%20por%20Yape%20para%20comprar%20contenido.%20Aquí%20está%20mi%20comprobante%20🛒🔥`;
             
             modal.classList.add('active');
         }
@@ -824,7 +899,6 @@ estoy por Miraflores o voy a domicilio 💋</div>
                 customSound.currentTime = 0;
                 customSound.volume = 1.0;
                 customSound.play().catch(e => {
-                    // Respaldo por si el navegador bloquea la reproducción automática
                     try {
                         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                         const osc1 = audioCtx.createOscillator();
@@ -866,7 +940,7 @@ estoy por Miraflores o voy a domicilio 💋</div>
             notifName.textContent = item.name + " (Recomendación)";
             notifText.textContent = item.text;
 
-            playCustomNotificationSound(); // Reproduce tu archivo notificacion.mp3
+            playCustomNotificationSound();
             notifElement.classList.add('show');
 
             currentIndex = (currentIndex + 1) % reseñasPool.length;
