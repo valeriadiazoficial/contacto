@@ -494,6 +494,13 @@
             pointer-events: auto;
         }
 
+        #ubicacionModal {
+            z-index: 220;
+            background: rgba(0, 0, 0, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
         .modal-content-wrapper {
             max-width: 340px;
             width: 100%;
@@ -504,6 +511,12 @@
             max-height: 90vh;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            transform: translateY(14px) scale(0.97);
+            transition: transform 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.18);
+        }
+
+        .photo-modal.active .modal-content-wrapper {
+            transform: translateY(0) scale(1);
         }
 
         .modal-img-frame {
@@ -541,6 +554,28 @@
             border: 1px solid rgba(255,255,255,0.28);
             cursor: zoom-in;
             transition: transform 0.3s ease;
+        }
+
+        .location-photo-link {
+            display: block;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .location-photo-img {
+            display: block;
+            width: 100%;
+            max-height: 42vh;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            transition: transform 0.25s ease;
+        }
+
+        .location-photo-link:active .location-photo-img {
+            transform: scale(0.98);
         }
 
         /* MINI CUADRADO DE DESCRIPCIÓN DE CONTENIDO Y CITAS - ESTILO IOS */
@@ -641,6 +676,19 @@
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
         }
 
+        .street-badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
         /* BOTONES DE PAGO Y ACCIÓN */
         .btn-comprar {
             position: relative;
@@ -668,6 +716,13 @@
 
         .btn-yape {
             background-color: #742284 !important;
+        }
+
+        .btn-ubicacion-negro {
+            background-color: #0b0b0c !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.32) !important;
+            font-size: 14px;
         }
 
         .btn-comprobar {
@@ -709,6 +764,10 @@
             font-weight: 600;
             cursor: pointer;
             z-index: 201;
+        }
+
+        #ubicacionModal .modal-close {
+            z-index: 225;
         }
     </style>
 </head>
@@ -842,8 +901,33 @@ estoy por Miraflores o voy a domicilio 💋</div>
                 <span>Pagar con Yape 💜</span>
             </button>
 
+            <button type="button" class="btn-comprar btn-ubicacion-negro" onclick="openUbicacionModal()">
+                <span>Ver ubicación 📍</span>
+            </button>
+
             <a id="citaWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank" rel="noopener noreferrer">
                 <span>Enviar comprobante y separar cita 📲</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MODAL DE UBICACIÓN EXACTA (EDIFICIO + GOOGLE MAPS) -->
+    <div id="ubicacionModal" class="photo-modal" onclick="if(event.target === this) closeUbicacionModal()">
+        <button type="button" class="modal-close" onclick="closeUbicacionModal()">✕</button>
+        <div class="modal-content-wrapper">
+            <div class="checkout-box" style="text-align: center;">
+                <h3 style="margin-bottom: 6px;">✨ <span class="contenido-destacado">Tengo mi propio departamento</span> ✨</h3>
+                <div class="street-badge">📍 Calle Schell 152 — Miraflores</div>
+            </div>
+
+            <div class="modal-img-frame">
+                <a class="location-photo-link" href="https://maps.app.goo.gl/pWJL7cBooKyj38WN9" target="_blank" rel="noopener noreferrer" title="Ir a la ubicación en tiempo real">
+                    <img class="location-photo-img" src="edificio-ubicacion.jpg" alt="Calle Schell 152 - Miraflores" decoding="async">
+                </a>
+            </div>
+
+            <a class="btn-comprar btn-ubicacion-negro" href="https://maps.app.goo.gl/pWJL7cBooKyj38WN9" target="_blank" rel="noopener noreferrer">
+                <span>Ir a la ubicación en tiempo real 📍</span>
             </a>
         </div>
     </div>
@@ -918,6 +1002,16 @@ estoy por Miraflores o voy a domicilio 💋</div>
 
         function closeCitaModal() {
             const modal = document.getElementById('citaModal');
+            modal.classList.remove('active');
+        }
+
+        function openUbicacionModal() {
+            const modal = document.getElementById('ubicacionModal');
+            modal.classList.add('active');
+        }
+
+        function closeUbicacionModal() {
+            const modal = document.getElementById('ubicacionModal');
             modal.classList.remove('active');
         }
 
