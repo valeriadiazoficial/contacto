@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valeria Diaz Oficial | Contacto</title>
     
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valeria Diaz Oficial | Contacto</title>
-    
     <!-- Open Graph para WhatsApp y Redes Sociales -->
     <meta property="og:title" content="Valeria Diaz | Contacto Oficial">
     <meta property="og:description" content="Escríbeme directo al WhatsApp o Telegram. Atencion personalizada y verificada.">
@@ -25,14 +18,21 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, "SF Pro Display", "SF Pro Text", BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
         body {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
             background: #000 url('diseno.jpg') no-repeat center center / cover;
             position: relative;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* EFECTO DE DIFUMINADO EN LA FOTO DE FONDO */
@@ -44,6 +44,7 @@
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             z-index: 1;
+            pointer-events: none;
         }
 
         /* Contenedor principal centrado */
@@ -71,6 +72,7 @@
             max-width: 360px;
             text-align: center;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transform: translateZ(0);
         }
 
         /* Foto de perfil SIN MARCO BLANCO */
@@ -82,12 +84,14 @@
             overflow: hidden;
             border: none;
             box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            transform: translateZ(0);
         }
 
         .avatar-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         .name-container {
@@ -99,9 +103,10 @@
         }
 
         .name-container h1 {
-            color: #fff;
+            color: #ffffff;
             font-size: 21px;
             font-weight: 700;
+            letter-spacing: -0.015em;
             text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
@@ -125,70 +130,75 @@
 
         /* ESTILO PARA LA BIO EN DOS LÍNEAS */
         .bio {
-            color: rgba(255, 255, 255, 0.95);
+            color: rgba(255, 255, 255, 0.96);
             font-size: 13.5px;
+            font-weight: 500;
+            letter-spacing: -0.01em;
             margin-bottom: 20px;
             text-shadow: 0 1px 2px rgba(0,0,0,0.6);
-            line-height: 1.4;
+            line-height: 1.42;
         }
 
         .bio span {
             display: block;
         }
 
-        /* ANIMACIÓN DE BRILLO TIPO OLA / COMPRA Y LATIDO */
-        @keyframes shineWave {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
+        /* ANIMACIONES FLUIDAS ACELERADAS POR GPU */
         @keyframes pulseGlow {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+            0% { transform: translateZ(0) scale(1); }
+            50% { transform: translateZ(0) scale(1.02); }
+            100% { transform: translateZ(0) scale(1); }
         }
 
         @keyframes contenidoPulseShine {
             0%, 100% {
-                transform: scale(1);
-                text-shadow: 0 0 8px rgba(255, 193, 7, 0.45), 0 0 18px rgba(255, 215, 0, 0.25);
-                filter: brightness(1);
+                transform: translateZ(0) scale(1);
+                text-shadow: 0 0 8px rgba(255, 214, 10, 0.45), 0 0 18px rgba(255, 214, 10, 0.25);
             }
             50% {
-                transform: scale(1.04);
-                text-shadow: 0 0 14px rgba(255, 193, 7, 0.95), 0 0 26px rgba(255, 235, 130, 0.65);
-                filter: brightness(1.2);
+                transform: translateZ(0) scale(1.03);
+                text-shadow: 0 0 14px rgba(255, 214, 10, 0.95), 0 0 24px rgba(255, 235, 130, 0.6);
             }
         }
 
         @keyframes productShowcase {
             0%, 100% {
-                transform: translateY(0px) scale(1);
+                transform: translateZ(0) translateY(0px) scale(1);
                 box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55), 0 0 12px rgba(255, 215, 120, 0.18);
-                filter: brightness(1);
             }
             50% {
-                transform: translateY(-3px) scale(1.015);
-                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7), 0 0 22px rgba(255, 225, 150, 0.42);
-                filter: brightness(1.07);
+                transform: translateZ(0) translateY(-3px) scale(1.012);
+                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7), 0 0 22px rgba(255, 225, 150, 0.38);
             }
         }
 
         @keyframes productGlossSweep {
             0% {
-                left: -140%;
+                transform: translate3d(-160%, 0, 0) skewX(-22deg);
                 opacity: 0;
             }
             20% {
                 opacity: 1;
             }
             55% {
-                left: 140%;
+                transform: translate3d(240%, 0, 0) skewX(-22deg);
                 opacity: 0;
             }
             100% {
-                left: 140%;
+                transform: translate3d(240%, 0, 0) skewX(-22deg);
                 opacity: 0;
+            }
+        }
+
+        @keyframes shineSweep {
+            0% {
+                transform: translate3d(-120%, 0, 0) skewX(-20deg);
+            }
+            20% {
+                transform: translate3d(140%, 0, 0) skewX(-20deg);
+            }
+            100% {
+                transform: translate3d(140%, 0, 0) skewX(-20deg);
             }
         }
 
@@ -205,37 +215,34 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
+            letter-spacing: -0.01em;
             margin-bottom: 12px;
             border: none;
             cursor: pointer;
             animation: pulseGlow 2.5s infinite ease-in-out;
-            transition: transform 0.1s ease;
-            background-size: 200% 100%;
+            transition: transform 0.12s ease;
+            will-change: transform;
         }
 
         .btn-contacto::after {
             content: '';
             position: absolute;
-            top: 0; left: -150%;
-            width: 150%; height: 100%;
+            top: 0; left: 0;
+            width: 85%; height: 100%;
             background: linear-gradient(
                 90deg,
                 transparent,
                 rgba(255, 255, 255, 0.35),
                 transparent
             );
-            transform: skewX(-20deg);
+            transform: translate3d(-120%, 0, 0) skewX(-20deg);
             animation: shineSweep 3s infinite linear;
-        }
-
-        @keyframes shineSweep {
-            0% { left: -150%; }
-            20% { left: 150%; }
-            100% { left: 150%; }
+            pointer-events: none;
+            will-change: transform;
         }
 
         .btn-contacto:active {
-            transform: scale(0.95);
+            transform: translateZ(0) scale(0.96);
         }
 
         .whatsapp {
@@ -261,20 +268,21 @@
             width: 20px;
             height: 20px;
             fill: currentColor;
+            flex-shrink: 0;
         }
 
         /* NOTIFICACIONES FLOTANTES TIPO IOS CON TRANSICIÓN DIFUMINADA */
         .ios-notification {
-            position: absolute;
+            position: fixed;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%) translateY(-100px);
+            transform: translate3d(-50%, -120px, 0);
             width: 90%;
             max-width: 350px;
-            background: rgba(20, 20, 20, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(28, 28, 30, 0.9);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.22);
             border-radius: 20px;
             padding: 12px 16px;
             display: flex;
@@ -283,12 +291,13 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 10;
             opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+            transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease;
             pointer-events: none;
+            will-change: transform, opacity;
         }
 
         .ios-notification.show {
-            transform: translateX(-50%) translateY(0);
+            transform: translate3d(-50%, 0, 0);
             opacity: 1;
         }
 
@@ -313,24 +322,28 @@
         }
 
         .notif-title {
-            color: #fff;
+            color: #ffffff;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
 
         .notif-time {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.65);
             font-size: 11px;
+            font-weight: 500;
         }
 
         .notif-body {
-            color: rgba(255, 255, 255, 0.95);
+            color: #ffffff;
             font-size: 12.5px;
-            line-height: 1.3;
+            font-weight: 500;
+            line-height: 1.35;
+            letter-spacing: -0.01em;
         }
 
         .notif-stars {
-            color: #ffc107;
+            color: #ffd60a;
             font-size: 11px;
             margin-top: 2px;
         }
@@ -340,33 +353,37 @@
             position: fixed;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%) translateY(-80px);
-            background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            transform: translate3d(-50%, -90px, 0);
+            background: rgba(28, 28, 30, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.25);
-            color: #fff;
+            color: #ffffff;
             padding: 10px 18px;
             border-radius: 30px;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: -0.01em;
             z-index: 300;
             box-shadow: 0 10px 25px rgba(0,0,0,0.6);
             opacity: 0;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            transition: transform 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.28s ease;
             pointer-events: none;
             text-align: center;
+            will-change: transform, opacity;
         }
 
         .copy-toast.show {
-            transform: translateX(-50%) translateY(0);
+            transform: translate3d(-50%, 0, 0);
             opacity: 1;
         }
 
         .location-footer {
             margin-top: 10px;
-            color: rgba(255, 255, 255, 0.9);
+            color: #ffffff;
             font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -378,22 +395,24 @@
         .catalog-drawer {
             position: fixed;
             top: 0;
-            right: -100%;
+            right: 0;
+            transform: translate3d(100%, 0, 0);
             width: 100%;
             max-width: 380px;
             height: 100%;
-            background: rgba(15, 15, 15, 0.95);
+            background: rgba(20, 20, 22, 0.96);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 100;
             box-shadow: -10px 0 30px rgba(0,0,0,0.8);
-            transition: right 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
+            transition: transform 0.34s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
+            will-change: transform;
         }
 
         .catalog-drawer.open {
-            right: 0;
+            transform: translate3d(0, 0, 0);
         }
 
         .catalog-header {
@@ -401,32 +420,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
         }
 
         .catalog-title {
-            color: #fff;
+            color: #ffffff;
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.015em;
         }
 
         .close-btn {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.14);
             border: none;
-            color: #fff;
+            color: #ffffff;
             width: 34px;
             height: 34px;
             border-radius: 50%;
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background 0.15s ease, transform 0.1s ease;
+        }
+
+        .close-btn:active {
+            transform: scale(0.92);
+            background: rgba(255,255,255,0.24);
         }
 
         .catalog-body {
             padding: 15px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
@@ -447,11 +475,13 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            display: block;
+            transition: transform 0.25s ease;
+            will-change: transform;
         }
 
         .catalog-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
 
         /* MODAL DE FOTO AMPLIADA / CHECKOUT DE CONTENIDO Y CITAS */
@@ -467,7 +497,8 @@
             padding: 20px;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.22s ease;
+            will-change: opacity;
         }
 
         .photo-modal.active {
@@ -484,6 +515,7 @@
             gap: 12px;
             max-height: 90vh;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .modal-img-frame {
@@ -492,13 +524,14 @@
             border-radius: 14px;
             overflow: hidden;
             animation: productShowcase 3.2s ease-in-out infinite;
+            will-change: transform;
         }
 
         .modal-img-frame::after {
             content: '';
             position: absolute;
             top: 0;
-            left: -140%;
+            left: 0;
             width: 90%;
             height: 100%;
             background: linear-gradient(
@@ -507,9 +540,10 @@
                 rgba(255, 255, 255, 0.28),
                 transparent
             );
-            transform: skewX(-22deg);
+            transform: translate3d(-160%, 0, 0) skewX(-22deg);
             animation: productGlossSweep 3.8s ease-in-out infinite;
             pointer-events: none;
+            will-change: transform, opacity;
         }
 
         .modal-img {
@@ -520,35 +554,46 @@
             border-radius: 14px;
             border: 1px solid rgba(255,255,255,0.28);
             cursor: zoom-in;
-            transition: transform 0.3s ease;
+            transition: transform 0.25s ease;
+            will-change: transform;
         }
 
-        /* MINI CUADRADO DE DESCRIPCIÓN DE CONTENIDO Y CITAS */
+        /* MINI CUADRADO DE DESCRIPCIÓN DE CONTENIDO Y CITAS - ESTILO IOS */
         .checkout-box {
-            background: rgba(25, 25, 25, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 14px;
-            padding: 15px;
+            background: rgba(28, 28, 30, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 18px;
+            padding: 16px;
             width: 100%;
-            color: #fff;
+            color: #ffffff;
             text-align: left;
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 600;
             line-height: 1.5;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            letter-spacing: -0.01em;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
         .checkout-box h3 {
-            font-size: 15px;
-            margin-bottom: 8px;
+            font-size: 15.5px;
+            font-weight: 700;
+            margin-bottom: 10px;
             text-align: center;
-            color: #ffc107;
+            color: #ffd60a;
+            letter-spacing: -0.015em;
         }
 
         .contenido-destacado {
             display: inline-block;
-            color: #ffd54f;
+            color: #ffd60a;
             font-weight: 700;
+            letter-spacing: -0.01em;
             animation: contenidoPulseShine 2.2s ease-in-out infinite;
+            will-change: transform;
         }
 
         .checkout-box ul {
@@ -558,26 +603,33 @@
         }
 
         .checkout-box li {
-            padding: 2px 0;
-            font-size: 13px;
+            padding: 3px 0;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: -0.01em;
         }
 
         .checkout-box .price-tag {
             text-align: center;
-            font-weight: bold;
-            font-size: 14.5px;
-            color: #25d366;
-            margin-top: 8px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 6px;
+            font-weight: 700;
+            font-size: 15px;
+            color: #30d158;
+            margin-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            padding-top: 8px;
+            letter-spacing: -0.01em;
         }
 
         .checkout-box .cita-text {
             white-space: pre-line;
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 600;
             text-align: center;
-            color: rgba(255,255,255,0.95);
-            line-height: 1.4;
+            color: #ffffff;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
         }
 
         /* BOTONES DE PAGO Y ACCIÓN */
@@ -591,16 +643,22 @@
             width: 100%;
             padding: 12px;
             background-color: #111111;
-            color: #fff;
+            color: #ffffff;
             border-radius: 14px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 14.5px;
+            letter-spacing: -0.01em;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.25);
             cursor: pointer;
             animation: pulseGlow 2s infinite ease-in-out;
-            background-size: 200% 100%;
+            transition: transform 0.12s ease;
+            will-change: transform;
+        }
+
+        .btn-comprar:active {
+            transform: translateZ(0) scale(0.97);
         }
 
         .btn-yape {
@@ -615,49 +673,70 @@
         .btn-comprar::after {
             content: '';
             position: absolute;
-            top: 0; left: -150%;
-            width: 150%; height: 100%;
+            top: 0; left: 0;
+            width: 85%; height: 100%;
             background: linear-gradient(
                 90deg,
                 transparent,
                 rgba(255, 255, 255, 0.4),
                 transparent
             );
-            transform: skewX(-20deg);
+            transform: translate3d(-120%, 0, 0) skewX(-20deg);
             animation: shineSweep 2.5s infinite linear;
+            pointer-events: none;
+            will-change: transform;
         }
 
         .modal-close {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.22);
             border: none;
-            color: #fff;
+            color: #ffffff;
             width: 40px;
             height: 40px;
             border-radius: 50%;
             font-size: 20px;
+            font-weight: 600;
             cursor: pointer;
             z-index: 201;
+            transition: background 0.15s ease, transform 0.1s ease;
+        }
+
+        .modal-close:active {
+            transform: scale(0.92);
+            background: rgba(255,255,255,0.35);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .btn-contacto,
+            .btn-contacto::after,
+            .btn-comprar,
+            .btn-comprar::after,
+            .contenido-destacado,
+            .modal-img-frame,
+            .modal-img-frame::after {
+                animation: none !important;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- ELEMENTO DE AUDIO PARA LA MÚSICA DE FONDO -->
-    <audio id="backgroundAudio" loop preload="auto">
+    <audio id="backgroundAudio" loop preload="none">
         <source src="musica-fondo.mp3" type="audio/mp3">
     </audio>
 
     <!-- ELEMENTO DE AUDIO PARA LA NOTIFICACIÓN -->
-    <audio id="notifSound" preload="auto">
+    <audio id="notifSound" preload="none">
         <source src="notificacion.mp3" type="audio/mp3">
     </audio>
 
     <!-- NOTIFICACIÓN FLOTANTE TIPO IOS -->
     <div id="iosNotif" class="ios-notification">
-        <img id="notifImg" class="notif-avatar" src="cliente1.jpg" alt="Cliente">
+        <img id="notifImg" class="notif-avatar" src="cliente1.jpg" alt="Cliente" decoding="async">
         <div class="notif-content">
             <div class="notif-header">
                 <span class="notif-title" id="notifName">Recomendación</span>
@@ -674,7 +753,7 @@
     <div class="main-container">
         <div class="profile-card">
             <div class="avatar-container">
-                <img src="perfil.jpg" alt="Valeria Diaz">
+                <img src="perfil.jpg" alt="Valeria Diaz" decoding="async">
             </div>
 
             <div class="name-container">
@@ -689,23 +768,23 @@
                 <span>Peruana - 21 años</span>
             </p>
 
-            <a href="https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20tu%20perfil%20y%20me%20gustaría%20más%20información." class="btn-contacto whatsapp" target="_blank">
+            <a href="https://wa.me/51999894839?text=Hola%20Valeria,%20vi%20tu%20perfil%20y%20me%20gustaría%20más%20información." class="btn-contacto whatsapp" target="_blank" rel="noopener noreferrer">
                 <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2M12.04 3.65c2.24 0 4.35.87 5.93 2.45a8.38 8.38 0 0 1 2.46 5.93c0 4.63-3.78 8.41-8.41 8.41-1.51 0-2.98-.41-4.27-1.19l-.3-.18-3.15.83.84-3.07-.2-.32a8.34 8.34 0 0 1-1.28-4.43c0-4.63 3.78-8.41 8.41-8.41m4.74 10.16c-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.58.13-.17.26-.67.85-.82 1.03-.15.17-.31.2-.57.07-.26-.13-1.1-.4-2.1-1.3-.78-.69-1.31-1.54-1.46-1.8-.15-.26-.02-.4.11-.53.11-.11.26-.29.39-.44.13-.15.17-.26.26-.43.09-.17.04-.31-.02-.44-.06-.13-.58-1.4-.8-1.92-.22-.51-.44-.44-.6-.45h-.51c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.13.17 1.75 2.67 4.24 3.74.59.26 1.05.42 1.41.54.59.19 1.13.16 1.55.1.47-.07 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.07-.11-.24-.17-.5-.3Z"/></svg>
                 <span>Escríbeme al WhatsApp</span>
             </a>
 
-            <a href="https://t.me/valerydia" class="btn-contacto telegram" target="_blank">
+            <a href="https://t.me/valerydia" class="btn-contacto telegram" target="_blank" rel="noopener noreferrer">
                 <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.85 1.18-5.23 3.48-.49.34-.94.51-1.34.5-.44-.01-1.28-.24-1.9-.44-.77-.24-1.37-.37-1.32-.78.03-.22.33-.44.94-.67 3.7-1.61 6.17-2.67 7.41-3.18 3.53-1.47 4.26-1.73 4.73-1.74.1 0 .33.02.48.15.12.1.15.23.17.33 0 .02.01.2-.02.43Z"/></svg>
                 <span>Escríbeme al Telegram</span>
             </a>
 
             <!-- BOTÓN MIS FOTOS -->
-            <button class="btn-contacto btn-fotos" onclick="toggleCatalog(); playBackgroundMusic();">
+            <button type="button" class="btn-contacto btn-fotos" onclick="toggleCatalog(); playBackgroundMusic();">
                 <span>MIS FOTOS 📸</span>
             </button>
 
             <!-- BOTÓN SEPARAR CITA -->
-            <button class="btn-contacto btn-fotos" onclick="openCitaModal(); playBackgroundMusic();" style="background: rgba(180, 20, 60, 0.85); border: 1px solid rgba(255,255,255,0.4);">
+            <button type="button" class="btn-contacto btn-fotos" onclick="openCitaModal(); playBackgroundMusic();" style="background: rgba(180, 20, 60, 0.85); border: 1px solid rgba(255,255,255,0.4);">
                 <span>SEPARAR MI CITA 🍑</span>
             </button>
 
@@ -719,17 +798,17 @@
     <div id="catalogDrawer" class="catalog-drawer">
         <div class="catalog-header">
             <span class="catalog-title">Servicio y contenido 🔥</span>
-            <button class="close-btn" onclick="toggleCatalog()">✕</button>
+            <button type="button" class="close-btn" onclick="toggleCatalog()">✕</button>
         </div>
         <div class="catalog-body" id="catalogGrid"></div>
     </div>
 
     <!-- MODAL DE CHECKOUT: COMPRAR CONTENIDO (YAPE) -->
-    <div id="photoModal" class="photo-modal">
-        <button class="modal-close" onclick="closePhotoModal()">✕</button>
+    <div id="photoModal" class="photo-modal" onclick="if(event.target === this) closePhotoModal()">
+        <button type="button" class="modal-close" onclick="closePhotoModal()">✕</button>
         <div class="modal-content-wrapper">
             <div class="modal-img-frame">
-                <img id="modalImage" class="modal-img" src="" alt="Foto de muestra" onclick="toggleZoom(this)">
+                <img id="modalImage" class="modal-img" src="" alt="Foto de muestra" decoding="async" onclick="toggleZoom(this)">
             </div>
             
             <div class="checkout-box">
@@ -745,19 +824,19 @@
                 <div class="price-tag">PRECIO : 35 SOLES 🙈🔥</div>
             </div>
 
-            <button class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
+            <button type="button" class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
                 <span>Pagar con Yape (35 Soles) 💜</span>
             </button>
 
-            <a id="modalWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
+            <a id="modalWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank" rel="noopener noreferrer">
                 <span>Enviar comprobante para atención 📲</span>
             </a>
         </div>
     </div>
 
     <!-- MODAL DE CHECKOUT: SEPARAR CITA (YAPE ADELANTO 50%) -->
-    <div id="citaModal" class="photo-modal">
-        <button class="modal-close" onclick="closeCitaModal()">✕</button>
+    <div id="citaModal" class="photo-modal" onclick="if(event.target === this) closeCitaModal()">
+        <button type="button" class="modal-close" onclick="closeCitaModal()">✕</button>
         <div class="modal-content-wrapper">
             <div class="checkout-box">
                 <h3>✨ ATENCION PRIVADA A1✨</h3>
@@ -769,11 +848,11 @@ estoy por Miraflores o voy a domicilio 💋</div>
                 <div class="price-tag"> SEPARAR MI CITA CON 50 SOLES 🙈</div>
             </div>
 
-            <button class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
+            <button type="button" class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
                 <span>Pagar con Yape (50 Soles) 💜</span>
             </button>
 
-            <a id="citaWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank">
+            <a id="citaWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank" rel="noopener noreferrer">
                 <span>Enviar comprobante y separar cita 📲</span>
             </a>
         </div>
@@ -804,13 +883,15 @@ estoy por Miraflores o voy a domicilio 💋</div>
         const catalogoMuestra = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
 
         const catalogGrid = document.getElementById('catalogGrid');
+        const fragment = document.createDocumentFragment();
         catalogoMuestra.forEach((fotoSrc, index) => {
             const div = document.createElement('div');
             div.className = 'catalog-item';
-            div.innerHTML = `<img src="${fotoSrc}" alt="Muestra ${index + 1}" loading="lazy">`;
+            div.innerHTML = `<img src="${fotoSrc}" alt="Muestra ${index + 1}" loading="lazy" decoding="async">`;
             div.onclick = () => openPhotoModal(fotoSrc);
-            catalogGrid.appendChild(div);
+            fragment.appendChild(div);
         });
+        catalogGrid.appendChild(fragment);
 
         function toggleCatalog() {
             const drawer = document.getElementById('catalogDrawer');
@@ -824,6 +905,7 @@ estoy por Miraflores o voy a domicilio 💋</div>
             
             modalImg.src = imgSrc;
             modalImg.style.transform = 'scale(1)';
+            modalImg.style.cursor = 'zoom-in';
             
             waBtn.href = `https://wa.me/51999894839?text=Hola%20Valeria,%20ya%20realicé%20el%20pago%20de%2035%20soles%20por%20Yape%20para%20comprar%20contenido.%20Aquí%20está%20mi%20comprobante%20🛒🔥`;
             
@@ -832,6 +914,9 @@ estoy por Miraflores o voy a domicilio 💋</div>
 
         function closePhotoModal() {
             const modal = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.style.transform = 'scale(1)';
+            modalImg.style.cursor = 'zoom-in';
             modal.classList.remove('active');
         }
 
@@ -859,13 +944,43 @@ estoy por Miraflores o voy a domicilio 💋</div>
             }
         }
 
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePhotoModal();
+                closeCitaModal();
+                document.getElementById('catalogDrawer').classList.remove('open');
+            }
+        });
+
         /* FUNCIÓN PARA COPIAR NÚMERO Y MOSTRAR TOAST MINIFATURA SUPERIOR */
         function copiarNumeroYPlin(numero, metodo, titular) {
-            navigator.clipboard.writeText(numero).then(() => {
-                mostrarToast(`📋 ¡${metodo} copiado! (${numero} - ${titular})`);
-            }).catch(err => {
-                prompt(`Copia el número de ${metodo}:`, numero);
-            });
+            const msg = `📋 ¡${metodo} copiado! (${numero} - ${titular})`;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(numero).then(() => {
+                    mostrarToast(msg);
+                }).catch(() => {
+                    copiarFallback(numero, msg);
+                });
+            } else {
+                copiarFallback(numero, msg);
+            }
+        }
+
+        function copiarFallback(numero, msg) {
+            const tempInput = document.createElement('input');
+            tempInput.value = numero;
+            tempInput.setAttribute('readonly', '');
+            tempInput.style.position = 'fixed';
+            tempInput.style.opacity = '0';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                mostrarToast(msg);
+            } catch (err) {
+                prompt('Copia el número:', numero);
+            }
+            document.body.removeChild(tempInput);
         }
 
         let toastTimeout;
@@ -885,10 +1000,11 @@ estoy por Miraflores o voy a domicilio 💋</div>
         function playBackgroundMusic() {
             const bgAudio = document.getElementById('backgroundAudio');
             if (bgAudio && !musicStarted) {
+                bgAudio.preload = 'auto';
                 bgAudio.volume = 0.25; 
                 bgAudio.play().then(() => {
                     musicStarted = true;
-                }).catch(e => {});
+                }).catch(() => {});
             }
         }
 
@@ -896,11 +1012,14 @@ estoy por Miraflores o voy a domicilio 💋</div>
         function playCustomNotificationSound() {
             const customSound = document.getElementById('notifSound');
             if (customSound) {
+                customSound.preload = 'auto';
                 customSound.currentTime = 0;
                 customSound.volume = 1.0;
-                customSound.play().catch(e => {
+                customSound.play().catch(() => {
                     try {
-                        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                        if (!AudioCtx) return;
+                        const audioCtx = new AudioCtx();
                         const osc1 = audioCtx.createOscillator();
                         const gain1 = audioCtx.createGain();
                         osc1.type = 'sine';
@@ -911,6 +1030,7 @@ estoy por Miraflores o voy a domicilio 💋</div>
                         gain1.connect(audioCtx.destination);
                         osc1.start();
                         osc1.stop(audioCtx.currentTime + 0.05);
+                        setTimeout(() => audioCtx.close().catch(() => {}), 150);
                     } catch (err) {}
                 });
             }
