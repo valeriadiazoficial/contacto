@@ -143,62 +143,62 @@
             display: block;
         }
 
-        /* ANIMACIONES FLUIDAS ACELERADAS POR GPU */
+        /* ANIMACIÓN DE BRILLO TIPO OLA / COMPRA Y LATIDO */
         @keyframes pulseGlow {
-            0% { transform: translateZ(0) scale(1); }
-            50% { transform: translateZ(0) scale(1.02); }
-            100% { transform: translateZ(0) scale(1); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shineSweep {
+            0% { left: -150%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
         }
 
         @keyframes contenidoPulseShine {
             0%, 100% {
-                transform: translateZ(0) scale(1);
-                text-shadow: 0 0 8px rgba(255, 214, 10, 0.45), 0 0 18px rgba(255, 214, 10, 0.25);
+                transform: scale(1);
+                color: #ffd60a;
+                text-shadow: 0 0 10px rgba(255, 214, 10, 0.75), 0 0 22px rgba(255, 193, 7, 0.55), 0 0 34px rgba(255, 235, 130, 0.35);
+                filter: brightness(1.05);
             }
             50% {
-                transform: translateZ(0) scale(1.03);
-                text-shadow: 0 0 14px rgba(255, 214, 10, 0.95), 0 0 24px rgba(255, 235, 130, 0.6);
+                transform: scale(1.06);
+                color: #fff3a1;
+                text-shadow: 0 0 16px rgba(255, 214, 10, 1), 0 0 30px rgba(255, 193, 7, 0.9), 0 0 44px rgba(255, 245, 175, 0.75);
+                filter: brightness(1.28);
             }
         }
 
         @keyframes productShowcase {
             0%, 100% {
-                transform: translateZ(0) translateY(0px) scale(1);
+                transform: translateY(0px) scale(1);
                 box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55), 0 0 12px rgba(255, 215, 120, 0.18);
+                filter: brightness(1);
             }
             50% {
-                transform: translateZ(0) translateY(-3px) scale(1.012);
-                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7), 0 0 22px rgba(255, 225, 150, 0.38);
+                transform: translateY(-3px) scale(1.015);
+                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7), 0 0 22px rgba(255, 225, 150, 0.42);
+                filter: brightness(1.07);
             }
         }
 
         @keyframes productGlossSweep {
             0% {
-                transform: translate3d(-160%, 0, 0) skewX(-22deg);
+                left: -140%;
                 opacity: 0;
             }
             20% {
                 opacity: 1;
             }
             55% {
-                transform: translate3d(240%, 0, 0) skewX(-22deg);
+                left: 140%;
                 opacity: 0;
             }
             100% {
-                transform: translate3d(240%, 0, 0) skewX(-22deg);
+                left: 140%;
                 opacity: 0;
-            }
-        }
-
-        @keyframes shineSweep {
-            0% {
-                transform: translate3d(-120%, 0, 0) skewX(-20deg);
-            }
-            20% {
-                transform: translate3d(140%, 0, 0) skewX(-20deg);
-            }
-            100% {
-                transform: translate3d(140%, 0, 0) skewX(-20deg);
             }
         }
 
@@ -220,29 +220,28 @@
             border: none;
             cursor: pointer;
             animation: pulseGlow 2.5s infinite ease-in-out;
-            transition: transform 0.12s ease;
-            will-change: transform;
+            transition: transform 0.1s ease;
+            background-size: 200% 100%;
         }
 
         .btn-contacto::after {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 85%; height: 100%;
+            top: 0; left: -150%;
+            width: 150%; height: 100%;
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 255, 255, 0.35),
+                rgba(255, 255, 255, 0.42),
                 transparent
             );
-            transform: translate3d(-120%, 0, 0) skewX(-20deg);
+            transform: skewX(-20deg);
             animation: shineSweep 3s infinite linear;
             pointer-events: none;
-            will-change: transform;
         }
 
         .btn-contacto:active {
-            transform: translateZ(0) scale(0.96);
+            transform: scale(0.95);
         }
 
         .whatsapp {
@@ -276,7 +275,7 @@
             position: fixed;
             top: 20px;
             left: 50%;
-            transform: translate3d(-50%, -120px, 0);
+            transform: translateX(-50%) translateY(-100px);
             width: 90%;
             max-width: 350px;
             background: rgba(28, 28, 30, 0.9);
@@ -291,13 +290,12 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 10;
             opacity: 0;
-            transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
             pointer-events: none;
-            will-change: transform, opacity;
         }
 
         .ios-notification.show {
-            transform: translate3d(-50%, 0, 0);
+            transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
 
@@ -353,7 +351,7 @@
             position: fixed;
             top: 20px;
             left: 50%;
-            transform: translate3d(-50%, -90px, 0);
+            transform: translateX(-50%) translateY(-80px);
             background: rgba(28, 28, 30, 0.96);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
@@ -367,14 +365,13 @@
             z-index: 300;
             box-shadow: 0 10px 25px rgba(0,0,0,0.6);
             opacity: 0;
-            transition: transform 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.28s ease;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
             pointer-events: none;
             text-align: center;
-            will-change: transform, opacity;
         }
 
         .copy-toast.show {
-            transform: translate3d(-50%, 0, 0);
+            transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
 
@@ -395,8 +392,7 @@
         .catalog-drawer {
             position: fixed;
             top: 0;
-            right: 0;
-            transform: translate3d(100%, 0, 0);
+            right: -100%;
             width: 100%;
             max-width: 380px;
             height: 100%;
@@ -405,14 +401,13 @@
             -webkit-backdrop-filter: blur(20px);
             z-index: 100;
             box-shadow: -10px 0 30px rgba(0,0,0,0.8);
-            transition: transform 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: right 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
             display: flex;
             flex-direction: column;
-            will-change: transform;
         }
 
         .catalog-drawer.open {
-            transform: translate3d(0, 0, 0);
+            right: 0;
         }
 
         .catalog-header {
@@ -443,12 +438,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.15s ease, transform 0.1s ease;
-        }
-
-        .close-btn:active {
-            transform: scale(0.92);
-            background: rgba(255,255,255,0.24);
         }
 
         .catalog-body {
@@ -476,12 +465,11 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.25s ease;
-            will-change: transform;
+            transition: transform 0.3s ease;
         }
 
         .catalog-item:hover img {
-            transform: scale(1.04);
+            transform: scale(1.05);
         }
 
         /* MODAL DE FOTO AMPLIADA / CHECKOUT DE CONTENIDO Y CITAS */
@@ -497,8 +485,7 @@
             padding: 20px;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.22s ease;
-            will-change: opacity;
+            transition: opacity 0.3s ease;
         }
 
         .photo-modal.active {
@@ -524,14 +511,13 @@
             border-radius: 14px;
             overflow: hidden;
             animation: productShowcase 3.2s ease-in-out infinite;
-            will-change: transform;
         }
 
         .modal-img-frame::after {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            left: -140%;
             width: 90%;
             height: 100%;
             background: linear-gradient(
@@ -540,10 +526,9 @@
                 rgba(255, 255, 255, 0.28),
                 transparent
             );
-            transform: translate3d(-160%, 0, 0) skewX(-22deg);
+            transform: skewX(-22deg);
             animation: productGlossSweep 3.8s ease-in-out infinite;
             pointer-events: none;
-            will-change: transform, opacity;
         }
 
         .modal-img {
@@ -554,8 +539,7 @@
             border-radius: 14px;
             border: 1px solid rgba(255,255,255,0.28);
             cursor: zoom-in;
-            transition: transform 0.25s ease;
-            will-change: transform;
+            transition: transform 0.3s ease;
         }
 
         /* MINI CUADRADO DE DESCRIPCIÓN DE CONTENIDO Y CITAS - ESTILO IOS */
@@ -579,6 +563,8 @@
         }
 
         .checkout-box h3 {
+            position: relative;
+            overflow: hidden;
             font-size: 15.5px;
             font-weight: 700;
             margin-bottom: 10px;
@@ -588,12 +574,34 @@
         }
 
         .contenido-destacado {
+            position: relative;
+            overflow: hidden;
             display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: linear-gradient(120deg, rgba(255, 214, 10, 0.22), rgba(255, 149, 0, 0.28), rgba(255, 214, 10, 0.22));
             color: #ffd60a;
             font-weight: 700;
             letter-spacing: -0.01em;
-            animation: contenidoPulseShine 2.2s ease-in-out infinite;
-            will-change: transform;
+            animation: contenidoPulseShine 1.9s ease-in-out infinite;
+        }
+
+        .contenido-destacado::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 140%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.65),
+                transparent
+            );
+            transform: skewX(-22deg);
+            animation: shineSweep 2.2s infinite linear;
+            pointer-events: none;
         }
 
         .checkout-box ul {
@@ -653,12 +661,8 @@
             border: 1px solid rgba(255, 255, 255, 0.25);
             cursor: pointer;
             animation: pulseGlow 2s infinite ease-in-out;
-            transition: transform 0.12s ease;
-            will-change: transform;
-        }
-
-        .btn-comprar:active {
-            transform: translateZ(0) scale(0.97);
+            transition: transform 0.1s ease;
+            background-size: 200% 100%;
         }
 
         .btn-yape {
@@ -673,18 +677,21 @@
         .btn-comprar::after {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 85%; height: 100%;
+            top: 0; left: -150%;
+            width: 150%; height: 100%;
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 0.45),
                 transparent
             );
-            transform: translate3d(-120%, 0, 0) skewX(-20deg);
+            transform: skewX(-20deg);
             animation: shineSweep 2.5s infinite linear;
             pointer-events: none;
-            will-change: transform;
+        }
+
+        .btn-comprar:active {
+            transform: scale(0.96);
         }
 
         .modal-close {
@@ -701,36 +708,18 @@
             font-weight: 600;
             cursor: pointer;
             z-index: 201;
-            transition: background 0.15s ease, transform 0.1s ease;
-        }
-
-        .modal-close:active {
-            transform: scale(0.92);
-            background: rgba(255,255,255,0.35);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .btn-contacto,
-            .btn-contacto::after,
-            .btn-comprar,
-            .btn-comprar::after,
-            .contenido-destacado,
-            .modal-img-frame,
-            .modal-img-frame::after {
-                animation: none !important;
-            }
         }
     </style>
 </head>
 <body>
 
     <!-- ELEMENTO DE AUDIO PARA LA MÚSICA DE FONDO -->
-    <audio id="backgroundAudio" loop preload="none">
+    <audio id="backgroundAudio" loop preload="auto">
         <source src="musica-fondo.mp3" type="audio/mp3">
     </audio>
 
     <!-- ELEMENTO DE AUDIO PARA LA NOTIFICACIÓN -->
-    <audio id="notifSound" preload="none">
+    <audio id="notifSound" preload="auto">
         <source src="notificacion.mp3" type="audio/mp3">
     </audio>
 
@@ -849,7 +838,7 @@ estoy por Miraflores o voy a domicilio 💋</div>
             </div>
 
             <button type="button" class="btn-comprar btn-yape" onclick="copiarNumeroYPlin('918168248', 'Yape', 'Yazmin')">
-                <span>Pagar con Yape (50 Soles) 💜</span>
+                <span>Pagar con Yape 💜</span>
             </button>
 
             <a id="citaWhatsAppBtn" class="btn-comprar btn-comprobar" href="#" target="_blank" rel="noopener noreferrer">
@@ -914,9 +903,6 @@ estoy por Miraflores o voy a domicilio 💋</div>
 
         function closePhotoModal() {
             const modal = document.getElementById('photoModal');
-            const modalImg = document.getElementById('modalImage');
-            modalImg.style.transform = 'scale(1)';
-            modalImg.style.cursor = 'zoom-in';
             modal.classList.remove('active');
         }
 
@@ -943,14 +929,6 @@ estoy por Miraflores o voy a domicilio 💋</div>
                 img.style.cursor = 'zoom-out';
             }
         }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closePhotoModal();
-                closeCitaModal();
-                document.getElementById('catalogDrawer').classList.remove('open');
-            }
-        });
 
         /* FUNCIÓN PARA COPIAR NÚMERO Y MOSTRAR TOAST MINIFATURA SUPERIOR */
         function copiarNumeroYPlin(numero, metodo, titular) {
@@ -1000,11 +978,10 @@ estoy por Miraflores o voy a domicilio 💋</div>
         function playBackgroundMusic() {
             const bgAudio = document.getElementById('backgroundAudio');
             if (bgAudio && !musicStarted) {
-                bgAudio.preload = 'auto';
                 bgAudio.volume = 0.25; 
                 bgAudio.play().then(() => {
                     musicStarted = true;
-                }).catch(() => {});
+                }).catch(e => {});
             }
         }
 
@@ -1012,14 +989,11 @@ estoy por Miraflores o voy a domicilio 💋</div>
         function playCustomNotificationSound() {
             const customSound = document.getElementById('notifSound');
             if (customSound) {
-                customSound.preload = 'auto';
                 customSound.currentTime = 0;
                 customSound.volume = 1.0;
-                customSound.play().catch(() => {
+                customSound.play().catch(e => {
                     try {
-                        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-                        if (!AudioCtx) return;
-                        const audioCtx = new AudioCtx();
+                        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                         const osc1 = audioCtx.createOscillator();
                         const gain1 = audioCtx.createGain();
                         osc1.type = 'sine';
@@ -1030,7 +1004,6 @@ estoy por Miraflores o voy a domicilio 💋</div>
                         gain1.connect(audioCtx.destination);
                         osc1.start();
                         osc1.stop(audioCtx.currentTime + 0.05);
-                        setTimeout(() => audioCtx.close().catch(() => {}), 150);
                     } catch (err) {}
                 });
             }
